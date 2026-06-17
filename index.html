@@ -95,24 +95,7 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
 .btn-car { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; }
 .btn-activity { background: linear-gradient(135deg, #ea580c, #c2410c); color: white; }
 
-/* RAW RESULT (fallback) */
-.result-card { background: var(--card); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius); padding: 28px; animation: fadeUp 0.4s ease; margin-top: 24px; }
-.result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-.result-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.result-label { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px; }
-.ai-text { font-size: 15px; color: #d0d8f0; line-height: 2; white-space: pre-wrap; }
-
-/* BADGES */
-.badges-wrap { margin-bottom: 20px; }
-.badges-title { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
-.badges { display: flex; flex-wrap: wrap; gap: 8px; }
-.badge { padding: 7px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.15s; }
-.badge:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-.badge.sel { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold-light); font-weight: 600; }
-.sel-counter { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
-.sel-counter span { color: var(--gold); font-weight: 700; }
-.divider { height: 1px; background: var(--border); margin: 24px 0; }
+/* ERROR BOX */
 .error-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 24px; color: #fca5a5; font-size: 14px; }
 .dest-reason { font-size: 14px; color: #c0cce0; line-height: 1.9; margin-bottom: 16px; }
 .dest-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
@@ -123,9 +106,20 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
 .info-label { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; margin-bottom: 8px; }
 .info-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .info-tag { padding: 5px 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: #a0b4cc; }
-.result-actions { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+.result-actions { display: flex; justify-content: flex-end; margin-bottom: 14px; margin-top: 16px; }
 .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 20px; font-size: 13px; font-weight: 700; color: #4ade80; cursor: pointer; font-family: 'Cairo', sans-serif; transition: all 0.15s; text-decoration: none; }
 .share-btn:hover { background: rgba(34,197,94,0.18); }
+
+/* BADGES & PICKERS */
+.badges-wrap { margin-bottom: 20px; }
+.badges-title { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { padding: 7px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+.badge:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.badge.sel { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold-light); font-weight: 600; }
+.sel-counter { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+.sel-counter span { color: var(--gold); font-weight: 700; }
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
 .picker-group { display: flex; flex-wrap: wrap; gap: 8px; }
 .picker-badge { padding: 9px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
 .picker-badge:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
@@ -173,7 +167,6 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
 
 <div class="main">
 
-  <!-- ADVISOR -->
   <div id="tab-advisor" class="section active">
     <div class="form-card">
       <div class="form-card-title">✦ أخبرنا عن رحلتك</div>
@@ -269,7 +262,6 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
     <div id="advisor-result"></div>
   </div>
 
-  <!-- COMPARE -->
   <div id="tab-compare" class="section">
     <div class="form-card">
       <div class="form-card-title">✦ قارن بين الوجهات</div>
@@ -293,7 +285,6 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
     <div id="compare-result"></div>
   </div>
 
-  <!-- COST -->
   <div id="tab-cost" class="section">
     <div class="form-card">
       <div class="form-card-title">✦ احسب تكلفة رحلتك</div>
@@ -356,7 +347,7 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
 const PROXY = 'https://travel-proxy.t314f11.workers.dev';
 const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzIkKJ5_QsBOmilJG-IcVgNsrXXBOAJ0eBAu5U4VvqJui3EFZyS8JYfh0efnJ2zGQNwRA/exec';
 
-// Affiliate IDs — ضع IDs الخاصة بك هنا
+// Affiliate IDs
 const AFF = {
   booking:    'YOUR_BOOKING_AFF_ID',
   kayak:      'YOUR_KAYAK_AFF_ID',
@@ -373,7 +364,6 @@ const CURRENCIES = {
   OM:{code:'OMR',name:'عُمان',rate:0.385}
 };
 
-// بيانات التوجيه الجغرافي — لكل دولة: عملة الحجز ومطار الانطلاق الرئيسي
 const GEO = {
   KW:{ selcur:'KWD', airport:'KWI' },
   SA:{ selcur:'SAR', airport:'RUH' },
@@ -385,7 +375,6 @@ const GEO = {
 
 const DESTS = ['تركيا','جورجيا','أذربيجان','تايلاند','اليابان','إيطاليا','إسبانيا','اليونان','المغرب','سريلانكا','بالي','ماليزيا','سنغافورة','أرمينيا','أوزبكستان','البوسنة','كرواتيا','البرتغال','فرنسا','ألمانيا','النمسا','سويسرا','مصر','الأردن','الهند','نيبال','فيتنام','الفلبين','كوريا الجنوبية','المالديف'];
 
-// Destination → search slug mapping for affiliate links
 const DEST_SLUGS = {
   'تركيا':'turkey','جورجيا':'georgia','أذربيجان':'azerbaijan','تايلاند':'thailand',
   'اليابان':'japan','إيطاليا':'italy','إسبانيا':'spain','اليونان':'greece',
@@ -397,7 +386,6 @@ const DEST_SLUGS = {
   'كوريا الجنوبية':'south-korea','المالديف':'maldives'
 };
 
-// Destination → IATA airport code (للوجهة) — لاستخدامها في روابط الطيران
 const DEST_AIRPORTS = {
   'تركيا':'IST','جورجيا':'TBS','أذربيجان':'GYD','تايلاند':'BKK',
   'اليابان':'NRT','إيطاليا':'FCO','إسبانيا':'MAD','اليونان':'ATH',
@@ -409,7 +397,7 @@ const DEST_AIRPORTS = {
   'كوريا الجنوبية':'ICN','المالديف':'MLE'
 };
 
-// ========== AFFILIATE LINK BUILDERS (مع التوجيه الجغرافي) ==========
+// ========== AFFILIATE LINK BUILDERS ==========
 function buildBookingLink(dest, countryCode) {
   const slug = DEST_SLUGS[dest] || dest;
   const geo = GEO[countryCode] || GEO.KW;
@@ -427,53 +415,62 @@ function buildCarLink(dest, countryCode) {
 }
 function buildActivityLink(dest) {
   const slug = DEST_SLUGS[dest] || dest;
-  // رابط Viator العام للبحث — يُحدّث بـ partner_id بعد الموافقة
   return `https://www.viator.com/searchResults/all?text=${encodeURIComponent(slug)}&pid=${AFF.activities}`;
 }
 
 // ========== TABS ==========
 function switchTab(t) {
-  document.querySelectorAll('.nav-tab').forEach((el,i)=>el.classList.toggle('active',['advisor','compare','cost'][i]===t));
-  document.querySelectorAll('.section').forEach(el=>el.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
+  const tabs = ['advisor', 'compare', 'cost'];
+  tabs.forEach((tab, i) => {
+    const el = document.querySelectorAll('.nav-tab')[i];
+    if (el) el.classList.toggle('active', tab === t);
+  });
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  const targetTab = document.getElementById('tab-' + t);
+  if (targetTab) targetTab.classList.add('active');
 }
 
 // ========== COUNTRY ==========
 const aCountry = document.getElementById('a-country');
-aCountry.addEventListener('change',()=>{
-  const c = CURRENCIES[aCountry.value];
-  document.getElementById('a-cur-lbl').textContent = c?'('+c.code+')':'';
-});
-aCountry.dispatchEvent(new Event('change'));
+if (aCountry) {
+  aCountry.addEventListener('change', () => {
+    const c = CURRENCIES[aCountry.value];
+    const lbl = document.getElementById('a-cur-lbl');
+    if (lbl) lbl.textContent = c ? '(' + c.code + ')' : '';
+  });
+  aCountry.dispatchEvent(new Event('change'));
+}
 
-// ========== PICKER GROUPS (single-select badges) ==========
+// ========== PICKER GROUPS ==========
 function setupPicker(groupId) {
   const group = document.getElementById(groupId);
-  group.querySelectorAll('.picker-badge').forEach(b=>{
+  if (!group) return;
+  group.querySelectorAll('.picker-badge').forEach(b => {
     b.onclick = () => {
-      group.querySelectorAll('.picker-badge').forEach(x=>x.classList.remove('sel'));
+      group.querySelectorAll('.picker-badge').forEach(x => x.classList.remove('sel'));
       b.classList.add('sel');
-      if(groupId === 'a-travelers-group' || groupId === 'a-level-group') checkBudget();
+      if (groupId === 'a-travelers-group' || groupId === 'a-level-group') checkBudget();
     };
   });
 }
-['a-travelers-group','a-type-group','a-weather-group','a-pref-group','a-level-group'].forEach(setupPicker);
+['a-travelers-group', 'a-type-group', 'a-weather-group', 'a-pref-group', 'a-level-group'].forEach(setupPicker);
 
 function getPickerValue(groupId) {
-  const sel = document.querySelector('#'+groupId+' .picker-badge.sel');
+  const sel = document.querySelector('#' + groupId + ' .picker-badge.sel');
   return sel ? sel.dataset.val : null;
 }
 
 // ========== BUDGET REALITY CHECK ==========
-// أدنى تكلفة تقديرية للشخص الواحد يومياً بالدولار حسب مستوى الإنفاق
 const MIN_DAILY_USD = { '💚 اقتصادي': 35, '💛 متوسط': 60, '💎 فاخر': 120 };
 const DURATION_DAYS = { '3-4 أيام': 4, '5-7 أيام': 6, '8-10 أيام': 9, 'أسبوعين': 14 };
 
 function checkBudget() {
   const budgetInput = document.getElementById('a-budget');
-  const budget = parseFloat(budgetInput.value);
   const warnEl = document.getElementById('budget-warning');
-  if(!budget) { warnEl.classList.remove('show'); return; }
+  if (!budgetInput || !warnEl) return;
+  
+  const budget = parseFloat(budgetInput.value);
+  if (!budget) { warnEl.classList.remove('show'); return; }
 
   const cv = aCountry.value;
   const cur = CURRENCIES[cv];
@@ -484,11 +481,10 @@ function checkBudget() {
   const durationLabel = document.getElementById('a-duration').value;
   const days = DURATION_DAYS[durationLabel] || 6;
 
-  // تقدير شامل: (تكلفة يومية × أيام × مسافرين) + تذاكر طيران تقديرية (≈$250 للشخص)
   const minDaily = MIN_DAILY_USD[level] || 60;
   const estimatedMin = (minDaily * days * travelers) + (250 * travelers);
 
-  if(usd < estimatedMin * 0.6) {
+  if (usd < estimatedMin * 0.6) {
     warnEl.innerHTML = '⚠️ ميزانيتك قد تكون مضغوطة جداً لهذا المستوى من السفر في هذه المدة. سنحاول إيجاد أفضل الخيارات الاقتصادية والوجهات القريبة المناسبة لميزانيتك.';
     warnEl.classList.add('show');
   } else {
@@ -496,27 +492,34 @@ function checkBudget() {
   }
 }
 
-document.getElementById('a-budget').addEventListener('input', checkBudget);
-document.getElementById('a-duration').addEventListener('change', checkBudget);
-aCountry.addEventListener('change', checkBudget);
+const budgetEl = document.getElementById('a-budget');
+if (budgetEl) budgetEl.addEventListener('input', checkBudget);
+const durationEl = document.getElementById('a-duration');
+if (durationEl) durationEl.addEventListener('change', checkBudget);
+if (aCountry) aCountry.addEventListener('change', checkBudget);
 
 // ========== BADGES ==========
 const selDests = new Set();
 const badgesEl = document.getElementById('dest-badges');
-DESTS.forEach(d=>{
-  const b = document.createElement('span');
-  b.className='badge'; b.textContent=d;
-  b.onclick=()=>{
-    if(b.classList.contains('sel')){selDests.delete(d);b.classList.remove('sel');}
-    else if(selDests.size<3){selDests.add(d);b.classList.add('sel');}
-    document.getElementById('sel-count').textContent=selDests.size;
-  };
-  badgesEl.appendChild(b);
-});
+if (badgesEl) {
+  DESTS.forEach(d => {
+    const b = document.createElement('span');
+    b.className = 'badge'; b.textContent = d;
+    b.onclick = () => {
+      if (b.classList.contains('sel')) { selDests.delete(d); b.classList.remove('sel'); }
+      else if (selDests.size < 3) { selDests.add(d); b.classList.add('sel'); }
+      const countEl = document.getElementById('sel-count');
+      if (countEl) countEl.textContent = selDests.size;
+    };
+    badgesEl.appendChild(b);
+  });
+}
 
 // ========== LOADING WITH EMAIL CAPTURE ==========
 function showLoading(id) {
-  document.getElementById(id).innerHTML = `
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.innerHTML = `
     <div class="loading-wrap">
       <div class="dots"><span></span><span></span><span></span></div>
       <div class="loading-title">جاري تحليل أفضل الوجهات لك...</div>
@@ -534,54 +537,50 @@ function showLoading(id) {
 }
 
 function saveEmail(id) {
-  const input = document.getElementById('email-input-'+id);
+  const input = document.getElementById('email-input-' + id);
   const email = input ? input.value.trim() : '';
-  if(!email || !email.includes('@')) { alert('الرجاء إدخال بريد إلكتروني صحيح'); return; }
-  // حفظ محلي كنسخة احتياطية
-  const emails = JSON.parse(localStorage.getItem('safar_emails')||'[]');
-  if(!emails.includes(email)) { emails.push(email); localStorage.setItem('safar_emails', JSON.stringify(emails)); }
-  document.getElementById('email-saved-'+id).style.display = 'block';
-  input.disabled = true;
+  if (!email || !email.includes('@')) { alert('الرجاء إدخال بريد إلكتروني صحيح'); return; }
+  const emails = JSON.parse(localStorage.getItem('safar_emails') || '[]');
+  if (!emails.includes(email)) { emails.push(email); localStorage.setItem('safar_emails', JSON.stringify(emails)); }
+  const savedLbl = document.getElementById('email-saved-' + id);
+  if (savedLbl) savedLbl.style.display = 'block';
+  if (input) input.disabled = true;
 
-  // إرسال إلى Google Sheets
   fetch(LEADS_SHEET_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify({ email: email, source: 'سافر - ' + id })
   }).catch(err => console.log('Sheet save error (silent):', err));
-
-  console.log('Email captured:', email, '| Total local:', emails.length);
 }
 
 // ========== CLAUDE API (JSON MODE) ==========
 async function callClaudeJSON(prompt) {
   const resp = await fetch(PROXY, {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       payload: {
-        model:'claude-sonnet-4-5',
-        max_tokens:2500,
-        messages:[{role:'user', content: prompt + '\n\nمهم جداً: أجب بصيغة JSON صافية فقط بدون أي نص قبلها أو بعدها، وبدون ```json أو أي تنسيق markdown.'}]
+        model: 'claude-sonnet-4-5',
+        max_tokens: 2500,
+        messages: [{ role: 'user', content: prompt + '\n\nمهم جداً: أجب بصيغة JSON صافية فقط بدون أي نص قبلها أو بعدها، وبدون ```json أو أي تنسيق markdown.' }]
       }
     })
   });
-  if(!resp.ok) throw new Error('HTTP '+resp.status);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
   const data = await resp.json();
-  if(data.error) throw new Error(data.error.message);
+  if (data.error) throw new Error(data.error.message);
   let text = data.content?.[0]?.text || '{}';
-  // تنظيف أي markdown fences لو وُجدت
-  text = text.replace(/```json/g,'').replace(/```/g,'').trim();
+  text = text.replace(/```json/g, '').replace(/```/g, '').trim();
   try {
     return JSON.parse(text);
-  } catch(e) {
+  } catch (e) {
     throw new Error('تعذر قراءة الرد. حاول مرة أخرى.');
   }
 }
 
 function buildTags(arr, emoji) {
-  if(!arr || !Array.isArray(arr)) return '';
-  return arr.filter(t=>t && t.trim().length>1)
+  if (!arr || !Array.isArray(arr)) return '';
+  return arr.filter(t => t && t.trim().length > 1)
     .map(t => `<span class="info-tag">${emoji} ${t.trim()}</span>`).join('');
 }
 
@@ -593,31 +592,30 @@ function shareWhatsApp(summary) {
 
 // ========== RENDER DESTINATION CARDS (JSON) ==========
 function renderCards(destinations, fromCountry) {
-  const wrap = document.getElementById('advisor-result'); // تحديد مكان عرض البطاقات في الواجهة
-  wrap.innerHTML = ''; // تنظيف شاشة التحميل السابقة
+  const wrap = document.getElementById('advisor-result');
+  if (!wrap) return;
+  wrap.innerHTML = '';
   
   const wrapCards = document.createElement('div');
   wrapCards.className = 'dest-cards';
-  const nums = ['١','٢','٣','٤','٥'];
+  const nums = ['١', '٢', '٣', '٤', '٥'];
   let shareSummary = '';
 
   destinations.forEach((d, i) => {
     const card = document.createElement('div');
     card.className = 'dest-card';
     
-    // بناء روابط الأفلييت الجغرافية الذكية لكل وجهة
     const flightUrl = buildFlightLink(fromCountry, d.name);
     const hotelUrl  = buildBookingLink(d.name, fromCountry);
     const carUrl    = buildCarLink(d.name, fromCountry);
     const activityUrl = buildActivityLink(d.name);
 
-    // تجميع ملخص المشاركة عبر الواتساب
-    shareSummary += `📍 وجهة ${nums[i] || (i+1)}: ${d.name}\n💰 التكلفة التقديرية: ${d.estimated_cost || 'حسب الميزانية'}\n✨ ميزة: ${d.key_feature || ''}\n\n`;
+    shareSummary += `📍 وجهة ${nums[i] || (i + 1)}: ${d.name}\n💰 التكلفة التقديرية: ${d.estimated_cost || 'حسب الميزانية'}\n✨ ميزة: ${d.key_feature || ''}\n\n`;
 
     card.innerHTML = `
       <div class="dest-card-header">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="dest-num">${nums[i] || (i+1)}</div>
+          <div class="dest-num">${nums[i] || (i + 1)}</div>
           <div class="dest-name">${d.name}</div>
         </div>
       </div>
@@ -648,7 +646,6 @@ function renderCards(destinations, fromCountry) {
 
   wrap.appendChild(wrapCards);
 
-  // إضافة زر مشاركة النتيجة عبر الواتساب في الأسفل
   const shareDiv = document.createElement('div');
   shareDiv.className = 'result-actions';
   shareDiv.innerHTML = `<button class="share-btn" onclick="shareWhatsApp(\`${shareSummary}\`)">🟢 مشاركة الخطة عبر WhatsApp</button>`;
@@ -675,7 +672,7 @@ async function runAdvisor() {
     return;
   }
 
-  btn.disabled = true;
+  if (btn) btn.disabled = true;
   showLoading('advisor-result');
 
   const prompt = `أنت مستشار سفر ذكي وخبير مخصص للمسافر الخليجي. اقترح أفضل 3 وجهات سياحية تناسب هذه البيانات تماماً وبشكل موضوعي ومحايد:
@@ -711,153 +708,15 @@ async function runAdvisor() {
       throw new Error('الرد ليس مصفوفة صحيحة');
     }
   } catch (err) {
-    document.getElementById('advisor-result').innerHTML = `<div class="error-box">⚠️ حدث خطأ أثناء الاتصال بالمستشار الذكي. الرجاء المحاولة مرة أخرى. الخطأ: ${err.message}</div>`;
+    const resEl = document.getElementById('advisor-result');
+    if (resEl) resEl.innerHTML = `<div class="error-box">⚠️ حدث خطأ أثناء الاتصال بالمستشار الذكي. الرجاء المحاولة مرة أخرى. الخطأ: ${err.message}</div>`;
   } finally {
-    btn.disabled = false;
+    if (btn) btn.disabled = false;
   }
 }
 
-// الدوال المتبقية للتباويب الأخرى لإغلاق كود الـ JavaScript بأمان ومنع الأخطاء
 function runCompare() { alert('سيتم تفعيل ميزة المقارنة الفورية بناءً على خيارات الواجهة الجديدة قريباً.'); }
 function runCost() { alert('جاري ربط حاسبة التكلفة التفصيلية بالذكاء الاصطناعي.'); }
-</script>
-</body>
-</html>
-
-// ========== ADVISOR ==========
-async function runAdvisor() {
-  const cv = aCountry.value;
-  const cur = CURRENCIES[cv];
-  const budget = document.getElementById('a-budget').value;
-  if(!budget){alert('الرجاء إدخال الميزانية');return;}
-  const usd = Math.round(parseFloat(budget)/cur.rate);
-  const travelers = getPickerValue('a-travelers-group') || '2';
-  const month = document.getElementById('a-month').value;
-  const duration = document.getElementById('a-duration').value;
-  const type = getPickerValue('a-type-group') || 'زوجين / شهر عسل';
-  const weather = getPickerValue('a-weather-group') || '❄️ بارد / معتدل';
-  const pref = getPickerValue('a-pref-group') || '🏛️ ثقافة وتاريخ';
-  const level = getPickerValue('a-level-group') || '💛 متوسط';
-  const visa = document.getElementById('a-visa').value;
-  const tightBudget = document.getElementById('budget-warning').classList.contains('show');
-  showLoading('advisor-result');
-  document.getElementById('btn-advisor').disabled = true;
-  const prompt = `أنت مستشار سفر خبير متخصص في المسافر الخليجي. أجب بالعربية الفصحى.
-المستخدم من ${cur.name}.
-معطيات الرحلة:
-- الميزانية: ${budget} ${cur.code} (≈ $${usd})
-- المسافرون: ${travelers} أشخاص
-- شهر السفر: ${month}
-- المدة: ${duration}
-- نوع السفر: ${type}
-- الطقس: ${weather}
-- الوجهة: ${pref}
-- مستوى الإنفاق: ${level}
-- التأشيرة: ${visa}
-${tightBudget ? '\n⚠️ ملاحظة مهمة: الميزانية المذكورة مضغوطة جداً مقارنة بعدد المسافرين والمدة. رشح وجهات اقتصادية جداً ومناسبة للميزانية فعلياً (وجهات قريبة، تكاليف معيشة منخفضة)، ولا ترشح وجهات تتجاوز الميزانية.\n' : ''}
-رشح أفضل 3 وجهات. أعد البيانات بصيغة JSON بهذا الشكل بالضبط:
-{
-  "destinations": [
-    {
-      "name": "اسم الوجهة",
-      "reason": "3 جمل عن سبب التوصية",
-      "cost": "المبلغ بـ${cur.code} (≈ \$بالدولار)",
-      "visa": "وضع التأشيرة لمواطن ${cur.name}",
-      "feature": "أبرز ميزة في ${month}",
-      "places": ["مكان1","مكان2","مكان3","مكان4","مكان5"],
-      "activities": ["نشاط1","نشاط2","نشاط3","نشاط4","نشاط5"],
-      "shopping": ["مكان تسوق1","مكان تسوق2","مكان تسوق3"]
-    }
-  ],
-  "recommendation": "توصيتي الشخصية باسم وجهة واحدة وسبب قوي في جملتين"
-}`;
-  try {
-    const r = await callClaudeJSON(prompt);
-    showResult('advisor-result', r, aCountry.value);
-  } catch(e) { showError('advisor-result','خطأ: '+e.message); }
-  document.getElementById('btn-advisor').disabled = false;
-}
-
-// ========== COMPARE ==========
-async function runCompare() {
-  if(selDests.size<2){alert('اختر وجهتين على الأقل');return;}
-  const cv = document.getElementById('c-country').value;
-  const cur = CURRENCIES[cv];
-  const dests = Array.from(selDests).join(' و ');
-  showLoading('compare-result');
-  document.getElementById('btn-compare').disabled = true;
-  const prompt = `أنت خبير سفر. قارن بين: ${dests} — للمسافر من ${cur.name}.
-
-أعد البيانات بصيغة JSON بهذا الشكل بالضبط:
-{
-  "destinations": [
-    {
-      "name": "اسم الوجهة",
-      "reason": "وصف عام للوجهة في جملتين",
-      "cost": "متوسط تكلفة رحلة لشخصين 7 أيام بـ${cur.code} (≈ \$بالدولار)",
-      "visa": "وضع التأشيرة لمواطن ${cur.name}",
-      "feature": "أفضل موسم للزيارة + درجة الأمان من 10 + المناسبة للعائلة من 10",
-      "places": ["أبرز معلم1","أبرز معلم2","أبرز معلم3"],
-      "activities": ["سعر الفندق الليلة بالدولار","تكلفة الطعام اليومي بالدولار للشخص"],
-      "shopping": []
-    }
-  ],
-  "recommendation": "الأفضل للمسافر الخليجي مع السبب"
-}`;
-  try {
-    const r = await callClaudeJSON(prompt);
-    showResult('compare-result', r, cv);
-  } catch(e) { showError('compare-result','خطأ: '+e.message); }
-  document.getElementById('btn-compare').disabled = false;
-}
-
-// ========== COST ==========
-async function runCost() {
-  const dest = document.getElementById('co-dest').value;
-  if(!dest){alert('الرجاء إدخال الوجهة');return;}
-  const fromCode = document.getElementById('co-from').value;
-  const fromName = CURRENCIES[fromCode] ? CURRENCIES[fromCode].name : fromCode;
-  const currency = document.getElementById('co-currency').value;
-  const travelers = document.getElementById('co-travelers').value;
-  const days = document.getElementById('co-days').value;
-  const hotel = document.getElementById('co-hotel').value;
-  const season = document.getElementById('co-season').value;
-  showLoading('cost-result');
-  document.getElementById('btn-cost').disabled = true;
-  const prompt = `أنت خبير تكاليف سفر. احسب تكلفة رحلة:
-- من: ${fromName} إلى: ${dest}
-- ${travelers} مسافرين، ${days} أيام، ${hotel}، ${season}
-- العملة: ${currency}
-
-أعد البيانات بصيغة JSON بهذا الشكل بالضبط (وجهة واحدة فقط):
-{
-  "destinations": [
-    {
-      "name": "${dest}",
-      "reason": "ملخص قصير عن الرحلة",
-      "cost": "المجموع الكلي بـ${currency} (≈ \$بالدولار)",
-      "visa": "",
-      "feature": "نصيحة توفير واحدة مفيدة",
-      "places": [],
-      "activities": [
-        "تذاكر الطيران: المبلغ بـ${currency} (≈ \$بالدولار)",
-        "الفندق (${days} أيام): المبلغ (≈ \$بالدولار)",
-        "الطعام: المبلغ (≈ \$بالدولار)",
-        "المواصلات المحلية: المبلغ (≈ \$بالدولار)",
-        "الأنشطة والسياحة: المبلغ (≈ \$بالدولار)",
-        "مصاريف متفرقة: المبلغ (≈ \$بالدولار)"
-      ],
-      "shopping": []
-    }
-  ],
-  "recommendation": ""
-}`;
-  try {
-    const r = await callClaudeJSON(prompt);
-    showResult('cost-result', r, fromCode);
-  } catch(e) { showError('cost-result','خطأ: '+e.message); }
-  document.getElementById('btn-cost').disabled = false;
-}
 </script>
 </body>
 </html>
