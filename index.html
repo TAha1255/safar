@@ -87,14 +87,13 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
 .dest-name { font-size: 20px; font-weight: 900; color: var(--gold-light); }
 .dest-body { padding: 20px 24px; }
 .dest-text { font-size: 14px; color: #c0cce0; line-height: 2; white-space: pre-wrap; }
-.dest-actions { padding: 16px 24px 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.dest-actions { padding: 16px 24px 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .action-btn { padding: 12px 6px; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; text-align: center; text-decoration: none; display: block; transition: opacity 0.2s, transform 0.1s; }
 .action-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 .btn-flight { background: linear-gradient(135deg, #1d4ed8, #1e40af); color: white; }
 .btn-hotel { background: linear-gradient(135deg, #059669, #047857); color: white; }
 .btn-car { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; }
 .btn-activity { background: linear-gradient(135deg, #ea580c, #c2410c); color: white; }
-.btn-esim { background: linear-gradient(135deg, #0891b2, #0e7490); color: white; }
 
 /* RAW RESULT (fallback) */
 .result-card { background: var(--card); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius); padding: 28px; animation: fadeUp 0.4s ease; margin-top: 24px; }
@@ -138,7 +137,7 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
   .hero { padding: 40px 16px 32px; }
   .form-card { padding: 20px 16px; }
   .form-grid { grid-template-columns: 1fr 1fr; }
-  .dest-actions { grid-template-columns: 1fr 1fr 1fr; }
+  .dest-actions { grid-template-columns: 1fr 1fr; }
   .email-row { flex-direction: column; }
 }
 </style>
@@ -357,40 +356,13 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
 const PROXY = 'https://travel-proxy.t314f11.workers.dev';
 const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzIkKJ5_QsBOmilJG-IcVgNsrXXBOAJ0eBAu5U4VvqJui3EFZyS8JYfh0efnJ2zGQNwRA/exec';
 
-// ========== روابط Travelpayouts المباشرة ==========
-const TP = {
-  flights:   'https://aviasales.tpo.lu/l6lKuByq',
-  car:       'https://getrentacar.tpo.lu/kdLSqk10',
-  esim:      'https://airalo.tpo.lu/cyeOAJqN',
-  localrent: 'https://localrent.tpo.lu/pJXA6I67',
-  yesim:     'https://yesim.tpo.lu/X2GoCkDq',
-  activities:'https://klook.tpo.lu/XtikUUw9'
+// Affiliate IDs — ضع IDs الخاصة بك هنا
+const AFF = {
+  booking:    'YOUR_BOOKING_AFF_ID',
+  kayak:      'YOUR_KAYAK_AFF_ID',
+  rentalcars: 'YOUR_RENTALCARS_AFF_ID',
+  activities: 'YOUR_VIATOR_OR_GETYOURGUIDE_ID'
 };
-
-// ========== AFFILIATE LINK BUILDERS ==========
-function buildFlightLink(countryCode, dest) {
-  const geo = GEO[countryCode] || GEO.KW;
-  const destAirport = DEST_AIRPORTS[dest] || '';
-  // نضيف معلمات الوجهة ومطار الانطلاق للرابط المباشر
-  return `${TP.flights}?origin=${geo.airport}&destination=${destAirport}`;
-}
-function buildBookingLink(dest, countryCode) {
-  const slug = DEST_SLUGS[dest] || dest;
-  const geo = GEO[countryCode] || GEO.KW;
-  // Booking.com عبر Travelpayouts (لم يُقبل بعد — رابط مؤقت مباشر)
-  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(slug)}&selected_currency=${geo.selcur}`;
-}
-function buildCarLink(dest, countryCode) {
-  const slug = DEST_SLUGS[dest] || dest;
-  return `${TP.localrent}?location=${encodeURIComponent(slug)}`;
-}
-function buildActivityLink(dest) {
-  const slug = DEST_SLUGS[dest] || dest;
-  return `${TP.activities}?query=${encodeURIComponent(slug)}`;
-}
-function buildEsimLink() {
-  return TP.esim;
-}
 
 const CURRENCIES = {
   KW:{code:'KWD',name:'الكويت',rate:0.307},
@@ -401,6 +373,7 @@ const CURRENCIES = {
   OM:{code:'OMR',name:'عُمان',rate:0.385}
 };
 
+// بيانات التوجيه الجغرافي — لكل دولة: عملة الحجز ومطار الانطلاق الرئيسي
 const GEO = {
   KW:{ selcur:'KWD', airport:'KWI' },
   SA:{ selcur:'SAR', airport:'RUH' },
@@ -412,6 +385,7 @@ const GEO = {
 
 const DESTS = ['تركيا','جورجيا','أذربيجان','تايلاند','اليابان','إيطاليا','إسبانيا','اليونان','المغرب','سريلانكا','بالي','ماليزيا','سنغافورة','أرمينيا','أوزبكستان','البوسنة','كرواتيا','البرتغال','فرنسا','ألمانيا','النمسا','سويسرا','مصر','الأردن','الهند','نيبال','فيتنام','الفلبين','كوريا الجنوبية','المالديف'];
 
+// Destination → search slug mapping for affiliate links
 const DEST_SLUGS = {
   'تركيا':'turkey','جورجيا':'georgia','أذربيجان':'azerbaijan','تايلاند':'thailand',
   'اليابان':'japan','إيطاليا':'italy','إسبانيا':'spain','اليونان':'greece',
@@ -423,6 +397,7 @@ const DEST_SLUGS = {
   'كوريا الجنوبية':'south-korea','المالديف':'maldives'
 };
 
+// Destination → IATA airport code (للوجهة) — لاستخدامها في روابط الطيران
 const DEST_AIRPORTS = {
   'تركيا':'IST','جورجيا':'TBS','أذربيجان':'GYD','تايلاند':'BKK',
   'اليابان':'NRT','إيطاليا':'FCO','إسبانيا':'MAD','اليونان':'ATH',
@@ -433,6 +408,28 @@ const DEST_AIRPORTS = {
   'الهند':'DEL','نيبال':'KTM','فيتنام':'SGN','الفلبين':'MNL',
   'كوريا الجنوبية':'ICN','المالديف':'MLE'
 };
+
+// ========== AFFILIATE LINK BUILDERS (مع التوجيه الجغرافي) ==========
+function buildBookingLink(dest, countryCode) {
+  const slug = DEST_SLUGS[dest] || dest;
+  const geo = GEO[countryCode] || GEO.KW;
+  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(slug)}&aid=${AFF.booking}&selected_currency=${geo.selcur}`;
+}
+function buildFlightLink(countryCode, dest) {
+  const geo = GEO[countryCode] || GEO.KW;
+  const destAirport = DEST_AIRPORTS[dest] || (DEST_SLUGS[dest] || dest);
+  return `https://www.kayak.com/flights/${geo.airport}-${destAirport}/?a=${AFF.kayak}&curr=${geo.selcur}`;
+}
+function buildCarLink(dest, countryCode) {
+  const slug = DEST_SLUGS[dest] || dest;
+  const geo = GEO[countryCode] || GEO.KW;
+  return `https://www.rentalcars.com/en/country/${encodeURIComponent(slug)}/?affiliateCode=${AFF.rentalcars}&currency=${geo.selcur}`;
+}
+function buildActivityLink(dest) {
+  const slug = DEST_SLUGS[dest] || dest;
+  // رابط Viator العام للبحث — يُحدّث بـ partner_id بعد الموافقة
+  return `https://www.viator.com/searchResults/all?text=${encodeURIComponent(slug)}&pid=${AFF.activities}`;
+}
 
 // ========== TABS ==========
 function switchTab(t) {
@@ -604,11 +601,10 @@ function renderCards(destinations, fromCountry) {
   destinations.forEach((d, i) => {
     const card = document.createElement('div');
     card.className = 'dest-card';
-    const flightUrl   = buildFlightLink(fromCountry, d.name);
-    const hotelUrl    = buildBookingLink(d.name, fromCountry);
-    const carUrl      = buildCarLink(d.name, fromCountry);
+    const flightUrl = buildFlightLink(fromCountry, d.name);
+    const hotelUrl  = buildBookingLink(d.name, fromCountry);
+    const carUrl    = buildCarLink(d.name, fromCountry);
     const activityUrl = buildActivityLink(d.name);
-    const esimUrl     = buildEsimLink();
 
     const placeTags = buildTags(d.places, '📍');
     const actTags   = buildTags(d.activities, '🎯');
@@ -639,7 +635,6 @@ function renderCards(destinations, fromCountry) {
         <a href="${hotelUrl}"    target="_blank" class="action-btn btn-hotel">🏨 الفندق</a>
         <a href="${carUrl}"      target="_blank" class="action-btn btn-car">🚗 السيارة</a>
         <a href="${activityUrl}" target="_blank" class="action-btn btn-activity">🎯 نشاطات</a>
-        <a href="${esimUrl}"     target="_blank" class="action-btn btn-esim">📱 eSIM</a>
       </div>`;
     wrap.appendChild(card);
   });
