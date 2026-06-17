@@ -593,96 +593,136 @@ function shareWhatsApp(summary) {
 
 // ========== RENDER DESTINATION CARDS (JSON) ==========
 function renderCards(destinations, fromCountry) {
-  const wrap = document.createElement('div');
-  wrap.className = 'dest-cards';
+  const wrap = document.getElementById('advisor-result'); // تحديد مكان عرض البطاقات في الواجهة
+  wrap.innerHTML = ''; // تنظيف شاشة التحميل السابقة
+  
+  const wrapCards = document.createElement('div');
+  wrapCards.className = 'dest-cards';
   const nums = ['١','٢','٣','٤','٥'];
   let shareSummary = '';
 
   destinations.forEach((d, i) => {
     const card = document.createElement('div');
     card.className = 'dest-card';
+    
+    // بناء روابط الأفلييت الجغرافية الذكية لكل وجهة
     const flightUrl = buildFlightLink(fromCountry, d.name);
     const hotelUrl  = buildBookingLink(d.name, fromCountry);
     const carUrl    = buildCarLink(d.name, fromCountry);
     const activityUrl = buildActivityLink(d.name);
 
-    const placeTags = buildTags(d.places, '📍');
-    const actTags   = buildTags(d.activities, '🎯');
-    const shopTags  = buildTags(d.shopping, '🛍️');
-
-    shareSummary += `${nums[i]||i+1}. ${d.name} — ${d.cost || ''} ${d.visa ? '| تأشيرة: '+d.visa : ''}\n`;
+    // تجميع ملخص المشاركة عبر الواتساب
+    shareSummary += `📍 وجهة ${nums[i] || (i+1)}: ${d.name}\n💰 التكلفة التقديرية: ${d.estimated_cost || 'حسب الميزانية'}\n✨ ميزة: ${d.key_feature || ''}\n\n`;
 
     card.innerHTML = `
       <div class="dest-card-header">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div class="dest-num">${nums[i]||i+1}</div>
-          <div class="dest-name">${d.name||''}</div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="dest-num">${nums[i] || (i+1)}</div>
+          <div class="dest-name">${d.name}</div>
         </div>
       </div>
       <div class="dest-body">
-        ${d.reason ? `<div class="dest-reason">${d.reason}</div>` : ''}
+        <div class="dest-reason">${d.reason || 'وجهة مثالية مقترحة بناءً على تفضيلاتك وميزانيتك المحددة.'}</div>
+        
         <div class="dest-meta">
-          ${d.cost    ? `<div class="meta-item"><span class="meta-icon">💰</span><span class="meta-val">${d.cost}</span></div>` : ''}
-          ${d.visa    ? `<div class="meta-item"><span class="meta-icon">🛂</span><span class="meta-val">${d.visa}</span></div>` : ''}
-          ${d.feature ? `<div class="meta-item"><span class="meta-icon">⭐</span><span class="meta-val">${d.feature}</span></div>` : ''}
+          ${d.estimated_cost ? `<div class="meta-item"><span class="meta-icon">💰</span><span class="meta-val"><b>التكلفة التقديرية:</b> ${d.estimated_cost}</span></div>` : ''}
+          ${d.weather_info ? `<div class="meta-item"><span class="meta-icon">☀️</span><span class="meta-val"><b>الطقس المتوقع:</b> ${d.weather_info}</span></div>` : ''}
+          ${d.visa_info ? `<div class="meta-item"><span class="meta-icon">🛂</span><span class="meta-val"><b>التأشيرة للخليجيين:</b> ${d.visa_info}</span></div>` : ''}
         </div>
-        ${placeTags ? `<div class="info-section"><div class="info-label">📍 أبرز الأماكن</div><div class="info-tags">${placeTags}</div></div>` : ''}
-        ${actTags   ? `<div class="info-section"><div class="info-label">🎯 أفضل النشاطات</div><div class="info-tags">${actTags}</div></div>` : ''}
-        ${shopTags  ? `<div class="info-section"><div class="info-label">🛍️ التسوق</div><div class="info-tags">${shopTags}</div></div>` : ''}
+
+        ${d.highlights ? `
+        <div class="info-section">
+          <div class="info-label">✦ أبرز الأنشطة والأماكن:</div>
+          <div class="info-tags">${buildTags(d.highlights, '📍')}</div>
+        </div>` : ''}
       </div>
       <div class="dest-actions">
-        <a href="${flightUrl}"   target="_blank" class="action-btn btn-flight">✈️ الطيران</a>
-        <a href="${hotelUrl}"    target="_blank" class="action-btn btn-hotel">🏨 الفندق</a>
-        <a href="${carUrl}"      target="_blank" class="action-btn btn-car">🚗 السيارة</a>
-        <a href="${activityUrl}" target="_blank" class="action-btn btn-activity">🎯 نشاطات</a>
-      </div>`;
-    wrap.appendChild(card);
+        <a href="${flightUrl}" target="_blank" class="action-btn btn-flight">✈️ حجز طيران</a>
+        <a href="${hotelUrl}" target="_blank" class="action-btn btn-hotel">🏨 حجز فندق</a>
+        <a href="${carUrl}" target="_blank" class="action-btn btn-car">🚗 تأجير سيارة</a>
+        <a href="${activityUrl}" target="_blank" class="action-btn btn-activity">🎯 فعاليات</a>
+      </div>
+    `;
+    wrapCards.appendChild(card);
   });
 
-  return { wrap, shareSummary };
+  wrap.appendChild(wrapCards);
+
+  // إضافة زر مشاركة النتيجة عبر الواتساب في الأسفل
+  const shareDiv = document.createElement('div');
+  shareDiv.className = 'result-actions';
+  shareDiv.innerHTML = `<button class="share-btn" onclick="shareWhatsApp(\`${shareSummary}\`)">🟢 مشاركة الخطة عبر WhatsApp</button>`;
+  wrap.appendChild(shareDiv);
 }
 
-// ========== SHOW RESULT ==========
-function showResult(id, data, fromCountry) {
-  const container = document.getElementById(id);
-  container.innerHTML = '';
+// ========== FUNCTIONS TO RUN ADVISOR / COMPARE / COST ==========
+async function runAdvisor() {
+  const btn = document.getElementById('btn-advisor');
+  const country = document.getElementById('a-country').value;
+  const budget = document.getElementById('a-budget').value;
+  const month = document.getElementById('a-month').value;
+  const duration = document.getElementById('a-duration').value;
+  const visa = document.getElementById('a-visa').value;
+  
+  const travelers = getPickerValue('a-travelers-group');
+  const type = getPickerValue('a-type-group');
+  const weather = getPickerValue('a-weather-group');
+  const pref = getPickerValue('a-pref-group');
+  const level = getPickerValue('a-level-group');
 
-  const destinations = data.destinations || [];
-  if(destinations.length === 0) {
-    container.innerHTML = `<div class="error-box">⚠️ لم يتم العثور على نتائج، حاول مرة أخرى.</div>`;
+  if (!budget) {
+    alert('الرجاء إدخال الميزانية أولاً.');
     return;
   }
 
-  const { wrap, shareSummary } = renderCards(destinations, fromCountry);
+  btn.disabled = true;
+  showLoading('advisor-result');
 
-  // شريط أعلى النتائج: زر مشاركة واتساب
-  const actionsBar = document.createElement('div');
-  actionsBar.className = 'result-actions';
-  let fullSummary = shareSummary;
-  if(data.recommendation) fullSummary += `\n✦ التوصية: ${data.recommendation}`;
-  actionsBar.innerHTML = `<button class="share-btn" onclick='shareWhatsApp(${JSON.stringify(fullSummary)})'>🟢 شارك الخطة مع الربع</button>`;
-  container.appendChild(actionsBar);
-  container.appendChild(wrap);
+  const prompt = `أنت مستشار سفر ذكي وخبير مخصص للمسافر الخليجي. اقترح أفضل 3 وجهات سياحية تناسب هذه البيانات تماماً وبشكل موضوعي ومحايد:
+  - بلد الانطلاق: ${country}
+  - الميزانية الإجمالية: ${budget} ${CURRENCIES[country]?.code || ''}
+  - شهر السفر: ${month}
+  - مدة الرحلة: ${duration}
+  - عدد المسافرين: ${travelers}
+  - نوع السفر: ${type}
+  - تفضيل الطقس: ${weather}
+  - نوع الوجهة الأساسي: ${pref}
+  - مستوى الإنفاق المطلوب: ${level}
+  - سياسة التأشيرة المفضلة: ${visa}
 
-  // التوصية الشخصية
-  if(data.recommendation) {
-    const recCard = document.createElement('div');
-    recCard.className = 'result-card';
-    recCard.style.marginTop = '16px';
-    recCard.innerHTML = `
-      <div class="result-header">
-        <div class="result-dot"></div>
-        <div class="result-label">✦ التوصية الشخصية</div>
-      </div>
-      <div class="ai-text">${data.recommendation}</div>`;
-    container.appendChild(recCard);
+  يجب أن يكون الرد بصيغة JSON كمنظومة مصفوفة (Array) تحتوي على 3 كائنات (Objects) لكل وجهة، وبالمفاتيح التالية بالضبط باللغة العربية:
+  [
+    {
+      "name": "اسم الدولة أو المدينة",
+      "reason": "سبب الترشيح بناءً على الميزانية والطقس في هذا الشهر وملاءمتها للتفضيلات",
+      "estimated_cost": "حسبة تقديرية دقيقة ومحايدة بالعملة المحلية للشخصين شاملة السكن والطيران الاقتصادي",
+      "weather_info": "درجة الحرارة المتوقعة في شهر السفر المتوقع",
+      "visa_info": "متطلبات الفيزا لحاملي الجوازات الخليجية لهذه الوجهة",
+      "key_feature": "الميزة التنافسية الأساسية للوجهة",
+      "highlights": ["نشاط 1", "نشاط 2", "نشاط 3"]
+    }
+  ]`;
+
+  try {
+    const jsonResult = await callClaudeJSON(prompt);
+    if (jsonResult && Array.isArray(jsonResult)) {
+      renderCards(jsonResult, country);
+    } else {
+      throw new Error('الرد ليس مصفوفة صحيحة');
+    }
+  } catch (err) {
+    document.getElementById('advisor-result').innerHTML = `<div class="error-box">⚠️ حدث خطأ أثناء الاتصال بالمستشار الذكي. الرجاء المحاولة مرة أخرى. الخطأ: ${err.message}</div>`;
+  } finally {
+    btn.disabled = false;
   }
 }
 
-function showError(id, msg) {
-  document.getElementById(id).innerHTML = `<div class="error-box">⚠️ ${msg}</div>`;
-}
-
+// الدوال المتبقية للتباويب الأخرى لإغلاق كود الـ JavaScript بأمان ومنع الأخطاء
+function runCompare() { alert('سيتم تفعيل ميزة المقارنة الفورية بناءً على خيارات الواجهة الجديدة قريباً.'); }
+function runCost() { alert('جاري ربط حاسبة التكلفة التفصيلية بالذكاء الاصطناعي.'); }
+</script>
+</body>
+</html>
 
 // ========== ADVISOR ==========
 async function runAdvisor() {
