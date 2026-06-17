@@ -3,138 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سافر — دليل السفر الخليجي</title>
+<title>سافر — اكتشف وجهتك المثالية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-<style>
-:root {
-  --midnight: #0a0f1e;
-  --navy: #111827;
-  --card: #161d2e;
-  --border: rgba(255,255,255,0.08);
-  --gold: #c9a84c;
-  --gold-light: #f0d080;
-  --text: #f0f4ff;
-  --muted: #8892a4;
-  --radius: 16px;
-  --radius-sm: 10px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var(--text); direction: rtl; min-height: 100vh; }
-
-/* HERO */
-.hero { background: linear-gradient(160deg, #0a0f1e 0%, #0d1a3a 50%, #0a1628 100%); padding: 60px 20px 48px; text-align: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
-.hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%); pointer-events: none; }
-.hero-logo { font-size: 13px; font-weight: 600; letter-spacing: 3px; color: var(--gold); margin-bottom: 20px; }
-.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.2; margin-bottom: 16px; background: linear-gradient(135deg, #f0f4ff 0%, var(--gold-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hero p { font-size: 16px; color: var(--muted); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
-.hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-.stat { text-align: center; }
-.stat-num { font-size: 22px; font-weight: 700; color: var(--gold); }
-.stat-lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-/* NAV */
-.nav-wrap { background: var(--navy); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.nav-tabs { display: flex; max-width: 900px; margin: 0 auto; overflow-x: auto; }
-.nav-tab { flex: 1; min-width: 120px; padding: 16px 20px; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'Cairo', sans-serif; background: none; border-top: none; border-right: none; border-left: none; }
-.nav-tab:hover { color: var(--text); }
-.nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
-
-/* MAIN */
-.main { max-width: 900px; margin: 0 auto; padding: 32px 16px 60px; }
-.section { display: none; }
-.section.active { display: block; }
-
-/* FORM */
-.form-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
-.form-card-title { font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 20px; }
-.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-.field { display: flex; flex-direction: column; gap: 7px; }
-.field label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
-.field select, .field input { width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; font-family: 'Cairo', sans-serif; color: var(--text); outline: none; transition: border-color 0.2s; }
-.field select:focus, .field input:focus { border-color: var(--gold); background: rgba(201,168,76,0.05); }
-.field select option { background: #1a2035; }
-
-/* BUTTON */
-.btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--gold) 0%, #a87830 100%); color: #0a0f1e; border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
-.btn:hover { opacity: 0.92; transform: translateY(-1px); }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-/* LOADING WITH EMAIL CAPTURE */
-.loading-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; margin-top: 24px; text-align: center; }
-.loading-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.loading-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
-.dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 28px; }
-.dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); animation: dotPulse 1.4s infinite ease-in-out; }
-.dots span:nth-child(2) { animation-delay: 0.2s; }
-.dots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes dotPulse { 0%,80%,100%{transform:scale(0.6);opacity:0.3} 40%{transform:scale(1);opacity:1} }
-.email-capture { background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-sm); padding: 20px; }
-.email-capture-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
-.email-capture-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
-.email-row { display: flex; gap: 10px; }
-.email-row input { flex: 1; padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; font-family: 'Cairo', sans-serif; color: var(--text); outline: none; }
-.email-row input:focus { border-color: var(--gold); }
-.email-btn { padding: 10px 18px; background: var(--gold); color: #0a0f1e; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; white-space: nowrap; }
-.email-saved { font-size: 13px; color: #22c55e; margin-top: 8px; display: none; }
-
-/* DESTINATION CARDS */
-.dest-cards { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
-.dest-card { background: var(--card); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius); overflow: hidden; animation: fadeUp 0.4s ease; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-.dest-card-header { background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04)); padding: 20px 24px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.dest-num { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #0a0f1e; font-size: 14px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.dest-name { font-size: 20px; font-weight: 900; color: var(--gold-light); }
-.dest-body { padding: 20px 24px; }
-.dest-text { font-size: 14px; color: #c0cce0; line-height: 2; white-space: pre-wrap; }
-.dest-actions { padding: 16px 24px 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.action-btn { padding: 12px 6px; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; text-align: center; text-decoration: none; display: block; transition: opacity 0.2s, transform 0.1s; }
-.action-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-.btn-flight { background: linear-gradient(135deg, #1d4ed8, #1e40af); color: white; }
-.btn-hotel { background: linear-gradient(135deg, #059669, #047857); color: white; }
-.btn-car { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; }
-.btn-activity { background: linear-gradient(135deg, #ea580c, #c2410c); color: white; }
-
-/* ERROR BOX */
-.error-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 24px; color: #fca5a5; font-size: 14px; }
-.dest-reason { font-size: 14px; color: #c0cce0; line-height: 1.9; margin-bottom: 16px; }
-.dest-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-.meta-item { display: flex; align-items: flex-start; gap: 8px; }
-.meta-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-.meta-val { font-size: 13px; color: #a0b0cc; line-height: 1.6; }
-.info-section { margin-bottom: 14px; }
-.info-label { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; margin-bottom: 8px; }
-.info-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.info-tag { padding: 5px 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: #a0b4cc; }
-.result-actions { display: flex; justify-content: flex-end; margin-bottom: 14px; margin-top: 16px; }
-.share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 20px; font-size: 13px; font-weight: 700; color: #4ade80; cursor: pointer; font-family: 'Cairo', sans-serif; transition: all 0.15s; text-decoration: none; }
-.share-btn:hover { background: rgba(34,197,94,0.18); }
-
-/* BADGES & PICKERS */
-.badges-wrap { margin-bottom: 20px; }
-.badges-title { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
-.badges { display: flex; flex-wrap: wrap; gap: 8px; }
-.badge { padding: 7px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.15s; }
-.badge:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-.badge.sel { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold-light); font-weight: 600; }
-.sel-counter { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
-.sel-counter span { color: var(--gold); font-weight: 700; }
-.divider { height: 1px; background: var(--border); margin: 24px 0; }
-.picker-group { display: flex; flex-wrap: wrap; gap: 8px; }
-.picker-badge { padding: 9px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-size: 13px; font-family: 'Cairo', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-.picker-badge:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-.picker-badge.sel { background: rgba(201,168,76,0.14); border-color: var(--gold); color: var(--gold-light); font-weight: 700; }
-.budget-warning { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 14px; font-size: 13px; color: #fcd34d; line-height: 1.8; display: none; }
-.budget-warning.show { display: block; }
-
-@media(max-width:600px) {
-  .hero { padding: 40px 16px 32px; }
-  .form-card { padding: 20px 16px; }
-  .form-grid { grid-template-columns: 1fr 1fr; }
-  .dest-actions { grid-template-columns: 1fr 1fr; }
-  .email-row { flex-direction: column; }
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
       var script = document.createElement("script");
@@ -143,36 +14,818 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
       document.head.appendChild(script);
   })();
 </script>
+<style>
+:root {
+  --bg: #080c18;
+  --surface: #0e1525;
+  --card: #121929;
+  --card2: #161f32;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --gold: #c9a84c;
+  --gold2: #e8c96a;
+  --gold3: #f5e09a;
+  --text: #eef2ff;
+  --text2: #a0aec0;
+  --text3: #64748b;
+  --blue: #3b6cf4;
+  --green: #10b981;
+  --r: 14px;
+  --rs: 10px;
+  --rx: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== ANIMATED BG ===== */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+.orb1 { width: 500px; height: 500px; background: #c9a84c; top: -150px; right: -100px; animation-delay: 0s; }
+.orb2 { width: 400px; height: 400px; background: #3b6cf4; bottom: 10%; left: -80px; animation-delay: -4s; }
+.orb3 { width: 300px; height: 300px; background: #10b981; top: 50%; right: 30%; animation-delay: -8s; opacity: 0.1; }
+@keyframes orbFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 60px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold2);
+  letter-spacing: 1.5px;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.hero-badge::before { content: '✦'; }
+.hero h1 {
+  font-size: clamp(36px, 7vw, 76px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #fff 0%, var(--gold3) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 700;
+  color: var(--gold2);
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+.hero p {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 520px;
+  margin: 0 auto 44px;
+  line-height: 1.8;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, var(--gold) 0%, #a87830 100%);
+  color: #0a0f1e;
+  border: none;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 800;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.4); }
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num { font-size: 28px; font-weight: 900; color: var(--gold2); }
+.stat-lbl { font-size: 12px; color: var(--text3); margin-top: 4px; font-weight: 500; }
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text3);
+  font-size: 11px;
+  animation: bounce 2s infinite;
+}
+.scroll-hint::after { content: '↓'; font-size: 18px; color: var(--gold); }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+/* ===== DESTINATIONS PREVIEW ===== */
+.dest-preview {
+  position: relative;
+  z-index: 1;
+  padding: 0 16px 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.dest-preview-title {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.dest-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+.dest-scroll::-webkit-scrollbar { display: none; }
+.dest-chip {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.dest-chip:hover { border-color: var(--gold); color: var(--gold2); background: rgba(201,168,76,0.08); }
+.dest-chip .flag { font-size: 18px; }
+
+/* ===== NAV ===== */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,12,24,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+.nav-brand {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--gold2);
+  padding: 16px 0;
+  letter-spacing: 1px;
+}
+.nav-brand span { color: var(--text3); font-weight: 400; font-size: 12px; margin-right: 8px; }
+.nav-tabs { display: flex; }
+.nav-tab {
+  padding: 18px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: 'Cairo', sans-serif;
+  background: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text2); }
+.nav-tab.active { color: var(--gold2); border-bottom-color: var(--gold); }
+
+/* ===== MAIN ===== */
+.main {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 16px 80px;
+}
+.section { display: none; }
+.section.active { display: block; }
+
+/* ===== GLASS FORM CARD ===== */
+.form-card {
+  background: rgba(14,21,37,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border2);
+  border-radius: var(--rx);
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.3);
+}
+.form-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold2);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+}
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.field select, .field input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--rs);
+  font-size: 14px;
+  font-family: 'Cairo', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: all 0.2s;
+}
+.field select:focus, .field input:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+}
+.field select option { background: #0e1525; }
+
+/* ===== BUTTON ===== */
+.btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--gold) 0%, #a87830 100%);
+  color: #080c18;
+  border: none;
+  border-radius: var(--rs);
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+  letter-spacing: 0.3px;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(201,168,76,0.35); }
+.btn:active { transform: translateY(0); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ===== PICKER BADGES ===== */
+.picker-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.picker-badge {
+  padding: 9px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 13px;
+  font-family: 'Cairo', sans-serif;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.picker-badge:hover { color: var(--text2); border-color: var(--border2); }
+.picker-badge.sel {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  color: var(--gold2);
+  font-weight: 700;
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
+}
+
+/* ===== BUDGET WARNING ===== */
+.budget-warning {
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--rs);
+  padding: 14px 18px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #fcd34d;
+  line-height: 1.8;
+  display: none;
+}
+.budget-warning.show { display: block; }
+
+/* ===== DIVIDER ===== */
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ===== LOADING ===== */
+.loading-wrap {
+  background: rgba(14,21,37,0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border2);
+  border-radius: var(--rx);
+  padding: 40px 32px;
+  margin-top: 24px;
+  text-align: center;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.3);
+}
+.loading-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.loading-sub { font-size: 13px; color: var(--text3); margin-bottom: 28px; }
+.dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 32px; }
+.dots span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: dotPulse 1.4s infinite ease-in-out;
+}
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotPulse { 0%,80%,100%{transform:scale(0.5);opacity:0.2} 40%{transform:scale(1);opacity:1} }
+.email-capture {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--r);
+  padding: 20px;
+  text-align: right;
+}
+.email-capture-title { font-size: 14px; font-weight: 700; color: var(--gold2); margin-bottom: 4px; }
+.email-capture-sub { font-size: 12px; color: var(--text3); margin-bottom: 14px; }
+.email-row { display: flex; gap: 10px; }
+.email-row input {
+  flex: 1;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--rs);
+  font-size: 14px;
+  font-family: 'Cairo', sans-serif;
+  color: var(--text);
+  outline: none;
+  direction: ltr;
+}
+.email-row input:focus { border-color: var(--gold); }
+.email-btn {
+  padding: 11px 20px;
+  background: var(--gold);
+  color: #080c18;
+  border: none;
+  border-radius: var(--rs);
+  font-size: 13px;
+  font-weight: 800;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.email-btn:hover { opacity: 0.88; }
+.email-saved { font-size: 12px; color: var(--green); margin-top: 10px; display: none; }
+
+/* ===== DEST CARDS ===== */
+.dest-cards { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+.dest-card {
+  background: rgba(14,21,37,0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border2);
+  border-radius: var(--rx);
+  overflow: hidden;
+  animation: fadeUp 0.5s ease both;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+  transition: border-color 0.2s;
+}
+.dest-card:hover { border-color: rgba(201,168,76,0.3); }
+.dest-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--rx) var(--rx) 0 0;
+  filter: brightness(0.85);
+  transition: filter 0.3s, transform 0.4s;
+}
+.dest-card:hover .dest-img { filter: brightness(1); transform: scale(1.02); }
+.dest-img-wrap {
+  overflow: hidden;
+  border-radius: var(--rx) var(--rx) 0 0;
+  position: relative;
+}
+.dest-img-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to top, rgba(8,12,24,0.95) 0%, transparent 100%);
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.dest-card:nth-child(2) { animation-delay: 0.1s; }
+.dest-card:nth-child(3) { animation-delay: 0.2s; }
+
+.dest-card-header {
+  padding: 22px 26px 18px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.dest-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, #a87830 100%);
+  color: #080c18;
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+}
+.dest-name { font-size: 22px; font-weight: 900; color: var(--gold3); }
+
+.dest-body { padding: 22px 26px; }
+.dest-reason {
+  font-size: 14px;
+  color: #b0c0dc;
+  line-height: 1.9;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.dest-meta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.meta-item { display: flex; align-items: flex-start; gap: 10px; }
+.meta-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.meta-val { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+.info-section { margin-bottom: 16px; }
+.info-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.info-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.info-tag {
+  padding: 5px 13px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 12px;
+  color: var(--text2);
+  transition: all 0.15s;
+}
+.info-tag:hover { border-color: var(--border2); color: var(--text); }
+
+.dest-actions {
+  padding: 16px 26px 22px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.action-btn {
+  padding: 11px 6px;
+  border: none;
+  border-radius: var(--rs);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.action-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-flight { background: linear-gradient(135deg, #1d4ed8, #1e40af); color: white; }
+.btn-hotel  { background: linear-gradient(135deg, #059669, #047857); color: white; }
+.btn-car    { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; }
+.btn-activity { background: linear-gradient(135deg, #ea580c, #c2410c); color: white; }
+.btn-esim   { background: linear-gradient(135deg, #0891b2, #0e7490); color: white; }
+
+/* ===== RESULT CARD (text fallback) ===== */
+.result-actions { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #34d399;
+  cursor: pointer;
+  font-family: 'Cairo', sans-serif;
+  transition: all 0.15s;
+}
+.share-btn:hover { background: rgba(16,185,129,0.18); }
+.result-card {
+  background: rgba(14,21,37,0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--rx);
+  padding: 28px;
+  animation: fadeUp 0.4s ease;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+}
+.result-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.result-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.result-label { font-size: 12px; color: var(--gold2); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.ai-text { font-size: 14px; color: #b0c0dc; line-height: 2; white-space: pre-wrap; }
+
+/* ===== BADGES (compare) ===== */
+.badges-wrap { margin-bottom: 20px; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 13px;
+  font-family: 'Cairo', sans-serif;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.badge:hover { color: var(--text2); border-color: var(--border2); }
+.badge.sel { background: rgba(201,168,76,0.1); border-color: var(--gold); color: var(--gold2); font-weight: 700; }
+.sel-counter { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
+.sel-counter span { color: var(--gold2); font-weight: 700; }
+
+/* ===== ERROR ===== */
+.error-box {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--rs);
+  padding: 16px 20px;
+  margin-top: 24px;
+  color: #fca5a5;
+  font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 13px;
+}
+.footer strong { color: var(--gold2); }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:640px) {
+  .hero { padding: 60px 16px 40px; min-height: auto; }
+  .hero h1 { font-size: 36px; }
+  .hero-stats { gap: 24px; }
+  .form-card { padding: 20px 16px; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .dest-card-header { padding: 18px 18px 14px; }
+  .dest-body { padding: 18px 18px; }
+  .dest-actions { grid-template-columns: 1fr 1fr 1fr; padding: 14px 18px 18px; }
+  .nav-brand span { display: none; }
+  .email-row { flex-direction: column; }
+  .scroll-hint { display: none; }
+}
+</style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-logo">✦ سافر</div>
-  <h1>اكتشف وجهتك المثالية</h1>
-  <p>مستشار سفر ذكي مخصص للمسافر الخليجي — يرشدك حسب ميزانيتك وتفضيلاتك</p>
+<!-- ANIMATED BACKGROUND -->
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-badge">مستشار السفر الخليجي الذكي</div>
+  <h1>سافر</h1>
+  <div class="hero-sub">وين تسافر بميزانيتك؟</div>
+  <p>أخبرنا عن ميزانيتك وتفضيلاتك، وسنرشح لك أفضل 3 وجهات مثالية — مع تفاصيل التكلفة وأزرار الحجز الفورية</p>
+  <button class="hero-cta" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">
+    ابدأ الاستكشاف ✦
+  </button>
   <div class="hero-stats">
     <div class="stat"><div class="stat-num">30+</div><div class="stat-lbl">وجهة سياحية</div></div>
     <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">دول خليجية</div></div>
     <div class="stat"><div class="stat-num">AI</div><div class="stat-lbl">توصيات ذكية</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">أزرار حجز فوري</div></div>
+  </div>
+  <div class="scroll-hint">اسحب للأسفل</div>
+</section>
+
+<!-- DEST PREVIEW CHIPS -->
+<div class="dest-preview">
+  <div class="dest-preview-title">وجهات يبحث عنها الخليجيون الآن</div>
+  <div class="dest-scroll">
+    <div class="dest-chip"><span class="flag">🇬🇪</span>جورجيا</div>
+    <div class="dest-chip"><span class="flag">🇹🇷</span>تركيا</div>
+    <div class="dest-chip"><span class="flag">🇦🇿</span>أذربيجان</div>
+    <div class="dest-chip"><span class="flag">🇹🇭</span>تايلاند</div>
+    <div class="dest-chip"><span class="flag">🇯🇵</span>اليابان</div>
+    <div class="dest-chip"><span class="flag">🇬🇷</span>اليونان</div>
+    <div class="dest-chip"><span class="flag">🇲🇦</span>المغرب</div>
+    <div class="dest-chip"><span class="flag">🇧🇦</span>البوسنة</div>
+    <div class="dest-chip"><span class="flag">🇮🇩</span>بالي</div>
+    <div class="dest-chip"><span class="flag">🇲🇻</span>المالديف</div>
+    <div class="dest-chip"><span class="flag">🇰🇷</span>كوريا</div>
+    <div class="dest-chip"><span class="flag">🇵🇹</span>البرتغال</div>
   </div>
 </div>
 
-<div class="nav-wrap">
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="switchTab('advisor')">🧠 المستشار الذكي</button>
-    <button class="nav-tab" onclick="switchTab('compare')">⚖️ قارن الوجهات</button>
-    <button class="nav-tab" onclick="switchTab('cost')">🧮 حاسبة التكلفة</button>
+<!-- APP -->
+<div id="app">
+  <!-- NAV -->
+  <div class="nav-wrap">
+    <div class="nav-inner">
+      <div class="nav-brand">✦ سافر <span>دليل السفر الخليجي</span></div>
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('advisor')">🧠 المستشار</button>
+        <button class="nav-tab" onclick="switchTab('compare')">⚖️ قارن</button>
+        <button class="nav-tab" onclick="switchTab('cost')">🧮 التكلفة</button>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="main">
+  <!-- MAIN -->
+  <div class="main">
 
-  <div id="tab-advisor" class="section active">
-    <div class="form-card">
-      <div class="form-card-title">✦ أخبرنا عن رحلتك</div>
-      <div class="form-grid">
-        <div class="field"><label>دولتك</label>
-          <select id="a-country">
+    <!-- ADVISOR -->
+    <div id="tab-advisor" class="section active">
+      <div class="form-card">
+        <div class="form-card-title">✦ أخبرنا عن رحلتك</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>دولتك</label>
+            <select id="a-country">
+              <option value="KW">🇰🇼 الكويت (KWD)</option>
+              <option value="SA">🇸🇦 السعودية (SAR)</option>
+              <option value="AE">🇦🇪 الإمارات (AED)</option>
+              <option value="QA">🇶🇦 قطر (QAR)</option>
+              <option value="BH">🇧🇭 البحرين (BHD)</option>
+              <option value="OM">🇴🇲 عُمان (OMR)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>الميزانية <span id="a-cur-lbl" style="color:var(--gold);font-size:10px;"></span></label>
+            <input type="number" id="a-budget" placeholder="مثال: 600" min="50" />
+          </div>
+          <div class="field">
+            <label>شهر السفر</label>
+            <select id="a-month">
+              <option>يناير</option><option>فبراير</option><option>مارس</option><option>أبريل</option>
+              <option>مايو</option><option>يونيو</option><option>يوليو</option>
+              <option selected>أغسطس</option>
+              <option>سبتمبر</option><option>أكتوبر</option><option>نوفمبر</option><option>ديسمبر</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>مدة الرحلة</label>
+            <select id="a-duration">
+              <option>3-4 أيام</option><option selected>5-7 أيام</option>
+              <option>8-10 أيام</option><option>أسبوعين</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>التأشيرة</label>
+            <select id="a-visa">
+              <option value="مقبول تأشيرة عند الوصول أو إلكترونية">🟢 عند الوصول / إلكترونية</option>
+              <option value="بدون تأشيرة فقط">✅ بدون تأشيرة فقط</option>
+              <option value="غير مهم">🔵 غير مهم</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field" style="margin-bottom:18px;">
+          <div class="section-label">عدد المسافرين</div>
+          <div class="picker-group" id="a-travelers-group">
+            <span class="picker-badge" data-val="1">👤 منفرد</span>
+            <span class="picker-badge sel" data-val="2">👫 زوجين</span>
+            <span class="picker-badge" data-val="3">3 أشخاص</span>
+            <span class="picker-badge" data-val="4">👨‍👩‍👧‍👦 عائلة (4)</span>
+            <span class="picker-badge" data-val="5">5 أشخاص</span>
+            <span class="picker-badge" data-val="6">6+</span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:18px;">
+          <div class="section-label">تفضيل الطقس</div>
+          <div class="picker-group" id="a-weather-group">
+            <span class="picker-badge sel" data-val="❄️ بارد / معتدل">❄️ بارد / معتدل</span>
+            <span class="picker-badge" data-val="🌊 دافئ / شاطئ">🌊 دافئ / شاطئ</span>
+            <span class="picker-badge" data-val="🌤️ أي طقس">🌤️ أي طقس</span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:18px;">
+          <div class="section-label">نوع الوجهة</div>
+          <div class="picker-group" id="a-pref-group">
+            <span class="picker-badge" data-val="🏙️ مدن وتسوق">🏙️ مدن وتسوق</span>
+            <span class="picker-badge" data-val="🏔️ طبيعة ومغامرة">🏔️ طبيعة</span>
+            <span class="picker-badge sel" data-val="🏛️ ثقافة وتاريخ">🏛️ ثقافة</span>
+            <span class="picker-badge" data-val="🏖️ شواطئ واسترخاء">🏖️ شواطئ</span>
+            <span class="picker-badge" data-val="🎭 مزيج متنوع">🎭 متنوع</span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:0;">
+          <div class="section-label">مستوى الإنفاق</div>
+          <div class="picker-group" id="a-level-group">
+            <span class="picker-badge" data-val="💚 اقتصادي">💚 اقتصادي</span>
+            <span class="picker-badge sel" data-val="💛 متوسط">💛 متوسط</span>
+            <span class="picker-badge" data-val="💎 فاخر">💎 فاخر</span>
+          </div>
+        </div>
+
+        <div id="budget-warning" class="budget-warning"></div>
+        <div class="divider"></div>
+        <button class="btn" id="btn-advisor" onclick="runAdvisor()">اكتشف أفضل وجهة لي ✦</button>
+      </div>
+      <div id="advisor-result"></div>
+    </div>
+
+    <!-- COMPARE -->
+    <div id="tab-compare" class="section">
+      <div class="form-card">
+        <div class="form-card-title">✦ قارن بين الوجهات</div>
+        <div class="field" style="max-width:220px; margin-bottom:20px;">
+          <label>دولتك</label>
+          <select id="c-country">
             <option value="KW">🇰🇼 الكويت (KWD)</option>
             <option value="SA">🇸🇦 السعودية (SAR)</option>
             <option value="AE">🇦🇪 الإمارات (AED)</option>
@@ -181,178 +834,105 @@ body { font-family: 'Cairo', sans-serif; background: var(--midnight); color: var
             <option value="OM">🇴🇲 عُمان (OMR)</option>
           </select>
         </div>
-        <div class="field"><label>الميزانية <span id="a-cur-lbl" style="color:var(--gold);font-size:11px;"></span></label>
-          <input type="number" id="a-budget" placeholder="مثال: 600" min="50" />
+        <div class="badges-wrap">
+          <div class="section-label">اختر حتى 3 وجهات</div>
+          <div class="badges" id="dest-badges"></div>
         </div>
-        <div class="field"><label>شهر السفر</label>
-          <select id="a-month">
-            <option>يناير</option><option>فبراير</option><option>مارس</option><option>أبريل</option>
-            <option>مايو</option><option>يونيو</option><option>يوليو</option>
-            <option selected>أغسطس</option>
-            <option>سبتمبر</option><option>أكتوبر</option><option>نوفمبر</option><option>ديسمبر</option>
-          </select>
-        </div>
-        <div class="field"><label>مدة الرحلة</label>
-          <select id="a-duration">
-            <option>3-4 أيام</option><option selected>5-7 أيام</option>
-            <option>8-10 أيام</option><option>أسبوعين</option>
-          </select>
-        </div>
-        <div class="field"><label>التأشيرة</label>
-          <select id="a-visa">
-            <option value="مقبول تأشيرة عند الوصول أو إلكترونية">🟢 عند الوصول / إلكترونية</option>
-            <option value="بدون تأشيرة فقط">✅ بدون تأشيرة فقط</option>
-            <option value="غير مهم">🔵 غير مهم</option>
-          </select>
-        </div>
+        <div class="sel-counter">تم اختيار <span id="sel-count">0</span> من 3</div>
+        <button class="btn" id="btn-compare" onclick="runCompare()">قارن الوجهات المختارة ✦</button>
       </div>
-
-      <div class="divider"></div>
-
-      <div class="field" style="margin-bottom:16px;"><label>عدد المسافرين</label>
-        <div class="picker-group" id="a-travelers-group">
-          <span class="picker-badge" data-val="1">👤 منفرد</span>
-          <span class="picker-badge sel" data-val="2">👫 زوجين</span>
-          <span class="picker-badge" data-val="3">👨‍👩‍👦 3 أشخاص</span>
-          <span class="picker-badge" data-val="4">👨‍👩‍👧‍👦 عائلة (4)</span>
-          <span class="picker-badge" data-val="5">5 أشخاص</span>
-          <span class="picker-badge" data-val="6">6+</span>
-        </div>
-      </div>
-
-      <div class="field" style="margin-bottom:16px;"><label>نوع السفر</label>
-        <div class="picker-group" id="a-type-group">
-          <span class="picker-badge" data-val="عائلي">👨‍👩‍👧‍👦 عائلي</span>
-          <span class="picker-badge sel" data-val="زوجين / شهر عسل">💑 زوجين / شهر عسل</span>
-          <span class="picker-badge" data-val="مجموعة أصدقاء">🧑‍🤝‍🧑 مجموعة أصدقاء</span>
-          <span class="picker-badge" data-val="منفرد">🧳 منفرد</span>
-        </div>
-      </div>
-
-      <div class="field" style="margin-bottom:16px;"><label>تفضيل الطقس</label>
-        <div class="picker-group" id="a-weather-group">
-          <span class="picker-badge sel" data-val="❄️ بارد / معتدل">❄️ بارد / معتدل</span>
-          <span class="picker-badge" data-val="🌊 دافئ / شاطئ">🌊 دافئ / شاطئ</span>
-          <span class="picker-badge" data-val="🌤️ أي طقس">🌤️ أي طقس</span>
-        </div>
-      </div>
-
-      <div class="field" style="margin-bottom:16px;"><label>نوع الوجهة</label>
-        <div class="picker-group" id="a-pref-group">
-          <span class="picker-badge" data-val="🏙️ مدن وتسوق">🏙️ مدن وتسوق</span>
-          <span class="picker-badge" data-val="🏔️ طبيعة ومغامرة">🏔️ طبيعة ومغامرة</span>
-          <span class="picker-badge sel" data-val="🏛️ ثقافة وتاريخ">🏛️ ثقافة وتاريخ</span>
-          <span class="picker-badge" data-val="🏖️ شواطئ واسترخاء">🏖️ شواطئ واسترخاء</span>
-          <span class="picker-badge" data-val="🎭 مزيج متنوع">🎭 مزيج متنوع</span>
-        </div>
-      </div>
-
-      <div class="field" style="margin-bottom:16px;"><label>مستوى الإنفاق</label>
-        <div class="picker-group" id="a-level-group">
-          <span class="picker-badge" data-val="💚 اقتصادي">💚 اقتصادي</span>
-          <span class="picker-badge sel" data-val="💛 متوسط">💛 متوسط</span>
-          <span class="picker-badge" data-val="💎 فاخر">💎 فاخر</span>
-        </div>
-      </div>
-
-      <div id="budget-warning" class="budget-warning"></div>
-      <div class="divider"></div>
-      <button class="btn" id="btn-advisor" onclick="runAdvisor()">اكتشف أفضل وجهة لي ✦</button>
+      <div id="compare-result"></div>
     </div>
-    <div id="advisor-result"></div>
-  </div>
 
-  <div id="tab-compare" class="section">
-    <div class="form-card">
-      <div class="form-card-title">✦ قارن بين الوجهات</div>
-      <div class="field" style="max-width:240px; margin-bottom:20px;"><label>دولتك</label>
-        <select id="c-country">
-          <option value="KW">🇰🇼 الكويت (KWD)</option>
-          <option value="SA">🇸🇦 السعودية (SAR)</option>
-          <option value="AE">🇦🇪 الإمارات (AED)</option>
-          <option value="QA">🇶🇦 قطر (QAR)</option>
-          <option value="BH">🇧🇭 البحرين (BHD)</option>
-          <option value="OM">🇴🇲 عُمان (OMR)</option>
-        </select>
+    <!-- COST -->
+    <div id="tab-cost" class="section">
+      <div class="form-card">
+        <div class="form-card-title">✦ احسب تكلفة رحلتك</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>دولة الانطلاق</label>
+            <select id="co-from">
+              <option value="KW">🇰🇼 الكويت</option>
+              <option value="SA">🇸🇦 السعودية</option>
+              <option value="AE">🇦🇪 الإمارات</option>
+              <option value="QA">🇶🇦 قطر</option>
+              <option value="BH">🇧🇭 البحرين</option>
+              <option value="OM">🇴🇲 عُمان</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>العملة</label>
+            <select id="co-currency">
+              <option value="KWD">دينار كويتي (KWD)</option>
+              <option value="SAR">ريال سعودي (SAR)</option>
+              <option value="AED">درهم إماراتي (AED)</option>
+              <option value="QAR">ريال قطري (QAR)</option>
+              <option value="BHD">دينار بحريني (BHD)</option>
+              <option value="OMR">ريال عُماني (OMR)</option>
+              <option value="USD">دولار أمريكي (USD)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>الوجهة</label>
+            <input type="text" id="co-dest" placeholder="مثال: تركيا، اليابان" />
+          </div>
+          <div class="field">
+            <label>عدد المسافرين</label>
+            <select id="co-travelers">
+              <option>1</option><option selected>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>عدد الأيام</label>
+            <select id="co-days">
+              <option>3</option><option>5</option><option selected>7</option>
+              <option>10</option><option>14</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>مستوى الفندق</label>
+            <select id="co-hotel">
+              <option>3 نجوم (اقتصادي)</option>
+              <option selected>4 نجوم (متوسط)</option>
+              <option>5 نجوم (فاخر)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>موسم السفر</label>
+            <select id="co-season">
+              <option>موسم الذروة</option>
+              <option selected>موسم متوسط</option>
+              <option>موسم منخفض</option>
+            </select>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <button class="btn" id="btn-cost" onclick="runCost()">احسب التكلفة الكاملة ✦</button>
       </div>
-      <div class="badges-wrap">
-        <div class="badges-title">اختر حتى 3 وجهات</div>
-        <div class="badges" id="dest-badges"></div>
-      </div>
-      <div class="sel-counter">تم اختيار <span id="sel-count">0</span> من 3</div>
-      <button class="btn" id="btn-compare" onclick="runCompare()">قارن الوجهات المختارة ✦</button>
+      <div id="cost-result"></div>
     </div>
-    <div id="compare-result"></div>
-  </div>
 
-  <div id="tab-cost" class="section">
-    <div class="form-card">
-      <div class="form-card-title">✦ احسب تكلفة رحلتك</div>
-      <div class="form-grid">
-        <div class="field"><label>دولة الانطلاق</label>
-          <select id="co-from">
-            <option value="KW">🇰🇼 الكويت</option><option value="SA">🇸🇦 السعودية</option><option value="AE">🇦🇪 الإمارات</option>
-            <option value="QA">🇶🇦 قطر</option><option value="BH">🇧🇭 البحرين</option><option value="OM">🇴🇲 عُمان</option>
-          </select>
-        </div>
-        <div class="field"><label>العملة</label>
-          <select id="co-currency">
-            <option value="KWD">دينار كويتي (KWD)</option>
-            <option value="SAR">ريال سعودي (SAR)</option>
-            <option value="AED">درهم إماراتي (AED)</option>
-            <option value="QAR">ريال قطري (QAR)</option>
-            <option value="BHD">دينار بحريني (BHD)</option>
-            <option value="OMR">ريال عُماني (OMR)</option>
-            <option value="USD">دولار أمريكي (USD)</option>
-          </select>
-        </div>
-        <div class="field"><label>الوجهة</label>
-          <input type="text" id="co-dest" placeholder="مثال: تركيا، اليابان" />
-        </div>
-        <div class="field"><label>عدد المسافرين</label>
-          <select id="co-travelers">
-            <option>1</option><option selected>2</option><option>3</option>
-            <option>4</option><option>5</option><option>6+</option>
-          </select>
-        </div>
-        <div class="field"><label>عدد الأيام</label>
-          <select id="co-days">
-            <option>3</option><option>5</option><option selected>7</option>
-            <option>10</option><option>14</option>
-          </select>
-        </div>
-        <div class="field"><label>مستوى الفندق</label>
-          <select id="co-hotel">
-            <option>3 نجوم (اقتصادي)</option>
-            <option selected>4 نجوم (متوسط)</option>
-            <option>5 نجوم (فاخر)</option>
-          </select>
-        </div>
-        <div class="field"><label>موسم السفر</label>
-          <select id="co-season">
-            <option>موسم الذروة</option><option selected>موسم متوسط</option><option>موسم منخفض</option>
-          </select>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <button class="btn" id="btn-cost" onclick="runCost()">احسب التكلفة الكاملة ✦</button>
-    </div>
-    <div id="cost-result"></div>
-  </div>
+  </div><!-- /main -->
+</div><!-- /app -->
 
-</div>
+<!-- FOOTER -->
+<footer class="footer">
+  <strong>✦ سافر</strong> — مستشار السفر الخليجي الذكي<br>
+  <span style="font-size:11px;margin-top:6px;display:block;">جميع التقديرات تقريبية. تحقق من الأسعار الفعلية قبل الحجز.</span>
+</footer>
 
 <script>
-// ========== CONFIG ==========
 const PROXY = 'https://travel-proxy.t314f11.workers.dev';
 const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzIkKJ5_QsBOmilJG-IcVgNsrXXBOAJ0eBAu5U4VvqJui3EFZyS8JYfh0efnJ2zGQNwRA/exec';
 
-// Affiliate IDs
-const AFF = {
-  booking:    'YOUR_BOOKING_AFF_ID',
-  kayak:      'YOUR_KAYAK_AFF_ID',
-  rentalcars: 'YOUR_RENTALCARS_AFF_ID',
-  activities: 'YOUR_VIATOR_OR_GETYOURGUIDE_ID'
+const TP = {
+  flights:   'https://aviasales.tpo.lu/l6lKuByq',
+  car:       'https://getrentacar.tpo.lu/kdLSqk10',
+  esim:      'https://airalo.tpo.lu/cyeOAJqN',
+  localrent: 'https://localrent.tpo.lu/pJXA6I67',
+  yesim:     'https://yesim.tpo.lu/X2GoCkDq',
+  activities:'https://klook.tpo.lu/XtikUUw9'
 };
 
 const CURRENCIES = {
@@ -365,12 +945,9 @@ const CURRENCIES = {
 };
 
 const GEO = {
-  KW:{ selcur:'KWD', airport:'KWI' },
-  SA:{ selcur:'SAR', airport:'RUH' },
-  AE:{ selcur:'AED', airport:'DXB' },
-  QA:{ selcur:'QAR', airport:'DOH' },
-  BH:{ selcur:'BHD', airport:'BAH' },
-  OM:{ selcur:'OMR', airport:'MCT' }
+  KW:{selcur:'KWD',airport:'KWI'},SA:{selcur:'SAR',airport:'RUH'},
+  AE:{selcur:'AED',airport:'DXB'},QA:{selcur:'QAR',airport:'DOH'},
+  BH:{selcur:'BHD',airport:'BAH'},OM:{selcur:'OMR',airport:'MCT'}
 };
 
 const DESTS = ['تركيا','جورجيا','أذربيجان','تايلاند','اليابان','إيطاليا','إسبانيا','اليونان','المغرب','سريلانكا','بالي','ماليزيا','سنغافورة','أرمينيا','أوزبكستان','البوسنة','كرواتيا','البرتغال','فرنسا','ألمانيا','النمسا','سويسرا','مصر','الأردن','الهند','نيبال','فيتنام','الفلبين','كوريا الجنوبية','المالديف'];
@@ -397,326 +974,322 @@ const DEST_AIRPORTS = {
   'كوريا الجنوبية':'ICN','المالديف':'MLE'
 };
 
-// ========== AFFILIATE LINK BUILDERS ==========
-function buildBookingLink(dest, countryCode) {
-  const slug = DEST_SLUGS[dest] || dest;
-  const geo = GEO[countryCode] || GEO.KW;
-  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(slug)}&aid=${AFF.booking}&selected_currency=${geo.selcur}`;
-}
 function buildFlightLink(countryCode, dest) {
-  const geo = GEO[countryCode] || GEO.KW;
-  const destAirport = DEST_AIRPORTS[dest] || (DEST_SLUGS[dest] || dest);
-  return `https://www.kayak.com/flights/${geo.airport}-${destAirport}/?a=${AFF.kayak}&curr=${geo.selcur}`;
+  const geo = GEO[countryCode]||GEO.KW;
+  const destAirport = DEST_AIRPORTS[dest]||'';
+  return `${TP.flights}?origin=${geo.airport}&destination=${destAirport}`;
 }
-function buildCarLink(dest, countryCode) {
-  const slug = DEST_SLUGS[dest] || dest;
-  const geo = GEO[countryCode] || GEO.KW;
-  return `https://www.rentalcars.com/en/country/${encodeURIComponent(slug)}/?affiliateCode=${AFF.rentalcars}&currency=${geo.selcur}`;
+function buildBookingLink(dest, countryCode) {
+  const slug = DEST_SLUGS[dest]||dest;
+  const geo = GEO[countryCode]||GEO.KW;
+  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(slug)}&selected_currency=${geo.selcur}`;
+}
+function buildCarLink(dest) {
+  const slug = DEST_SLUGS[dest]||dest;
+  return `${TP.localrent}?location=${encodeURIComponent(slug)}`;
 }
 function buildActivityLink(dest) {
-  const slug = DEST_SLUGS[dest] || dest;
-  return `https://www.viator.com/searchResults/all?text=${encodeURIComponent(slug)}&pid=${AFF.activities}`;
+  const slug = DEST_SLUGS[dest]||dest;
+  return `${TP.activities}?query=${encodeURIComponent(slug)}`;
 }
+function buildEsimLink() { return TP.esim; }
 
-// ========== TABS ==========
+// ========== صور الوجهات (Unsplash مجاني) ==========
+const DEST_IMAGES = {
+  'تركيا':        'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=800&q=80',
+  'جورجيا':       'https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80',
+  'أذربيجان':     'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+  'تايلاند':      'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80',
+  'اليابان':      'https://images.unsplash.com/photo-1480796927426-f609979314bd?w=800&q=80',
+  'إيطاليا':      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
+  'إسبانيا':      'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80',
+  'اليونان':      'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80',
+  'المغرب':       'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80',
+  'سريلانكا':     'https://images.unsplash.com/photo-1586193960553-c985c1fbb4d3?w=800&q=80',
+  'بالي':         'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80',
+  'ماليزيا':      'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80',
+  'سنغافورة':     'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
+  'أرمينيا':      'https://images.unsplash.com/photo-1589171489378-c9e78c449711?w=800&q=80',
+  'أوزبكستان':    'https://images.unsplash.com/photo-1596204976717-1a9ff47f74ef?w=800&q=80',
+  'البوسنة':      'https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=800&q=80',
+  'كرواتيا':      'https://images.unsplash.com/photo-1555990793-da11153b2473?w=800&q=80',
+  'البرتغال':     'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+  'فرنسا':        'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80',
+  'ألمانيا':      'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80',
+  'النمسا':       'https://images.unsplash.com/photo-1609767760531-a402bdbda0df?w=800&q=80',
+  'سويسرا':       'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?w=800&q=80',
+  'مصر':          'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&q=80',
+  'الأردن':       'https://images.unsplash.com/photo-1548386018-9b8cc87a1a0c?w=800&q=80',
+  'الهند':        'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80',
+  'نيبال':        'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
+  'فيتنام':       'https://images.unsplash.com/photo-1540611025311-01df3cef54b5?w=800&q=80',
+  'الفلبين':      'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80',
+  'كوريا الجنوبية':'https://images.unsplash.com/photo-1538669715315-155098f0fb1d?w=800&q=80',
+  'المالديف':     'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80'
+};
+
 function switchTab(t) {
-  const tabs = ['advisor', 'compare', 'cost'];
-  tabs.forEach((tab, i) => {
-    const el = document.querySelectorAll('.nav-tab')[i];
-    if (el) el.classList.toggle('active', tab === t);
-  });
-  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-  const targetTab = document.getElementById('tab-' + t);
-  if (targetTab) targetTab.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach((el,i)=>el.classList.toggle('active',['advisor','compare','cost'][i]===t));
+  document.querySelectorAll('.section').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('app').scrollIntoView({behavior:'smooth'});
 }
 
-// ========== COUNTRY ==========
 const aCountry = document.getElementById('a-country');
-if (aCountry) {
-  aCountry.addEventListener('change', () => {
-    const c = CURRENCIES[aCountry.value];
-    const lbl = document.getElementById('a-cur-lbl');
-    if (lbl) lbl.textContent = c ? '(' + c.code + ')' : '';
-  });
-  aCountry.dispatchEvent(new Event('change'));
-}
+aCountry.addEventListener('change',()=>{
+  const c = CURRENCIES[aCountry.value];
+  document.getElementById('a-cur-lbl').textContent = c?'('+c.code+')':'';
+  checkBudget();
+});
+aCountry.dispatchEvent(new Event('change'));
 
-// ========== PICKER GROUPS ==========
 function setupPicker(groupId) {
   const group = document.getElementById(groupId);
-  if (!group) return;
-  group.querySelectorAll('.picker-badge').forEach(b => {
+  if(!group) return;
+  group.querySelectorAll('.picker-badge').forEach(b=>{
     b.onclick = () => {
-      group.querySelectorAll('.picker-badge').forEach(x => x.classList.remove('sel'));
+      group.querySelectorAll('.picker-badge').forEach(x=>x.classList.remove('sel'));
       b.classList.add('sel');
-      if (groupId === 'a-travelers-group' || groupId === 'a-level-group') checkBudget();
+      if(['a-travelers-group','a-level-group'].includes(groupId)) checkBudget();
     };
   });
 }
-['a-travelers-group', 'a-type-group', 'a-weather-group', 'a-pref-group', 'a-level-group'].forEach(setupPicker);
+['a-travelers-group','a-weather-group','a-pref-group','a-level-group'].forEach(setupPicker);
 
 function getPickerValue(groupId) {
-  const sel = document.querySelector('#' + groupId + ' .picker-badge.sel');
+  const sel = document.querySelector('#'+groupId+' .picker-badge.sel');
   return sel ? sel.dataset.val : null;
 }
 
-// ========== BUDGET REALITY CHECK ==========
-const MIN_DAILY_USD = { '💚 اقتصادي': 35, '💛 متوسط': 60, '💎 فاخر': 120 };
-const DURATION_DAYS = { '3-4 أيام': 4, '5-7 أيام': 6, '8-10 أيام': 9, 'أسبوعين': 14 };
+const MIN_DAILY_USD = {'💚 اقتصادي':35,'💛 متوسط':60,'💎 فاخر':120};
+const DURATION_DAYS = {'3-4 أيام':4,'5-7 أيام':6,'8-10 أيام':9,'أسبوعين':14};
 
 function checkBudget() {
-  const budgetInput = document.getElementById('a-budget');
+  const budget = parseFloat(document.getElementById('a-budget').value);
   const warnEl = document.getElementById('budget-warning');
-  if (!budgetInput || !warnEl) return;
-  
-  const budget = parseFloat(budgetInput.value);
-  if (!budget) { warnEl.classList.remove('show'); return; }
-
-  const cv = aCountry.value;
-  const cur = CURRENCIES[cv];
-  const usd = budget / cur.rate;
-
-  const travelers = parseInt(getPickerValue('a-travelers-group')) || 2;
-  const level = getPickerValue('a-level-group') || '💛 متوسط';
-  const durationLabel = document.getElementById('a-duration').value;
-  const days = DURATION_DAYS[durationLabel] || 6;
-
-  const minDaily = MIN_DAILY_USD[level] || 60;
-  const estimatedMin = (minDaily * days * travelers) + (250 * travelers);
-
-  if (usd < estimatedMin * 0.6) {
-    warnEl.innerHTML = '⚠️ ميزانيتك قد تكون مضغوطة جداً لهذا المستوى من السفر في هذه المدة. سنحاول إيجاد أفضل الخيارات الاقتصادية والوجهات القريبة المناسبة لميزانيتك.';
+  if(!budget){warnEl.classList.remove('show');return;}
+  const cur = CURRENCIES[aCountry.value];
+  const usd = budget/cur.rate;
+  const travelers = parseInt(getPickerValue('a-travelers-group'))||2;
+  const level = getPickerValue('a-level-group')||'💛 متوسط';
+  const days = DURATION_DAYS[document.getElementById('a-duration').value]||6;
+  const minDaily = MIN_DAILY_USD[level]||60;
+  const estimatedMin = (minDaily*days*travelers)+(250*travelers);
+  if(usd < estimatedMin*0.6){
+    warnEl.innerHTML='⚠️ ميزانيتك قد تكون مضغوطة لهذا المستوى. سنرشح لك أفضل الوجهات الاقتصادية المناسبة.';
     warnEl.classList.add('show');
-  } else {
-    warnEl.classList.remove('show');
-  }
+  } else { warnEl.classList.remove('show'); }
 }
+document.getElementById('a-budget').addEventListener('input',checkBudget);
+document.getElementById('a-duration').addEventListener('change',checkBudget);
 
-const budgetEl = document.getElementById('a-budget');
-if (budgetEl) budgetEl.addEventListener('input', checkBudget);
-const durationEl = document.getElementById('a-duration');
-if (durationEl) durationEl.addEventListener('change', checkBudget);
-if (aCountry) aCountry.addEventListener('change', checkBudget);
-
-// ========== BADGES ==========
 const selDests = new Set();
 const badgesEl = document.getElementById('dest-badges');
-if (badgesEl) {
-  DESTS.forEach(d => {
-    const b = document.createElement('span');
-    b.className = 'badge'; b.textContent = d;
-    b.onclick = () => {
-      if (b.classList.contains('sel')) { selDests.delete(d); b.classList.remove('sel'); }
-      else if (selDests.size < 3) { selDests.add(d); b.classList.add('sel'); }
-      const countEl = document.getElementById('sel-count');
-      if (countEl) countEl.textContent = selDests.size;
-    };
-    badgesEl.appendChild(b);
-  });
-}
+DESTS.forEach(d=>{
+  const b = document.createElement('span');
+  b.className='badge'; b.textContent=d;
+  b.onclick=()=>{
+    if(b.classList.contains('sel')){selDests.delete(d);b.classList.remove('sel');}
+    else if(selDests.size<3){selDests.add(d);b.classList.add('sel');}
+    document.getElementById('sel-count').textContent=selDests.size;
+  };
+  badgesEl.appendChild(b);
+});
 
-// ========== LOADING WITH EMAIL CAPTURE ==========
 function showLoading(id) {
-  const target = document.getElementById(id);
-  if (!target) return;
-  target.innerHTML = `
+  document.getElementById(id).innerHTML=`
     <div class="loading-wrap">
       <div class="dots"><span></span><span></span><span></span></div>
       <div class="loading-title">جاري تحليل أفضل الوجهات لك...</div>
-      <div class="loading-sub">يستغرق التحليل بضع ثوانٍ</div>
+      <div class="loading-sub">الذكاء الاصطناعي يعمل — بضع ثوانٍ</div>
       <div class="email-capture">
         <div class="email-capture-title">✦ احفظ خطة رحلتك مجاناً</div>
-        <div class="email-capture-sub">أدخل بريدك الإلكتروني لنرسل لك توصياتك وأفضل العروض</div>
+        <div class="email-capture-sub">أدخل بريدك لنرسل لك التوصيات وأفضل العروض</div>
         <div class="email-row">
-          <input type="email" id="email-input-${id}" placeholder="example@gmail.com" dir="ltr" />
+          <input type="email" id="email-input-${id}" placeholder="example@gmail.com" dir="ltr"/>
           <button class="email-btn" onclick="saveEmail('${id}')">احفظ</button>
         </div>
-        <div class="email-saved" id="email-saved-${id}">✓ تم الحفظ! سنرسل لك أفضل العروض</div>
+        <div class="email-saved" id="email-saved-${id}">✓ تم! سنرسل لك أفضل العروض</div>
       </div>
     </div>`;
 }
 
 function saveEmail(id) {
-  const input = document.getElementById('email-input-' + id);
-  const email = input ? input.value.trim() : '';
-  if (!email || !email.includes('@')) { alert('الرجاء إدخال بريد إلكتروني صحيح'); return; }
-  const emails = JSON.parse(localStorage.getItem('safar_emails') || '[]');
-  if (!emails.includes(email)) { emails.push(email); localStorage.setItem('safar_emails', JSON.stringify(emails)); }
-  const savedLbl = document.getElementById('email-saved-' + id);
-  if (savedLbl) savedLbl.style.display = 'block';
-  if (input) input.disabled = true;
-
-  fetch(LEADS_SHEET_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ email: email, source: 'سافر - ' + id })
-  }).catch(err => console.log('Sheet save error (silent):', err));
+  const input = document.getElementById('email-input-'+id);
+  const email = input?input.value.trim():'';
+  if(!email||!email.includes('@')){alert('الرجاء إدخال بريد إلكتروني صحيح');return;}
+  const emails = JSON.parse(localStorage.getItem('safar_emails')||'[]');
+  if(!emails.includes(email)){emails.push(email);localStorage.setItem('safar_emails',JSON.stringify(emails));}
+  document.getElementById('email-saved-'+id).style.display='block';
+  input.disabled=true;
+  fetch(LEADS_SHEET_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({email,source:'سافر - '+id})}).catch(()=>{});
 }
 
-// ========== CLAUDE API (JSON MODE) ==========
 async function callClaudeJSON(prompt) {
-  const resp = await fetch(PROXY, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      payload: {
-        model: 'claude-sonnet-4-5',
-        max_tokens: 2500,
-        messages: [{ role: 'user', content: prompt + '\n\nمهم جداً: أجب بصيغة JSON صافية فقط بدون أي نص قبلها أو بعدها، وبدون ```json أو أي تنسيق markdown.' }]
-      }
-    })
+  const resp = await fetch(PROXY,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({payload:{model:'claude-sonnet-4-5',max_tokens:2500,messages:[{role:'user',content:prompt+'\n\nمهم جداً: أجب بصيغة JSON صافية فقط بدون أي نص قبلها أو بعدها، وبدون ```json أو أي تنسيق markdown.'}]}})
   });
-  if (!resp.ok) throw new Error('HTTP ' + resp.status);
-  const data = await resp.json();
-  if (data.error) throw new Error(data.error.message);
-  let text = data.content?.[0]?.text || '{}';
-  text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    throw new Error('تعذر قراءة الرد. حاول مرة أخرى.');
-  }
+  if(!resp.ok) throw new Error('HTTP '+resp.status);
+  const data=await resp.json();
+  if(data.error) throw new Error(data.error.message);
+  let text=data.content?.[0]?.text||'{}';
+  text=text.replace(/```json/g,'').replace(/```/g,'').trim();
+  try{return JSON.parse(text);}catch(e){throw new Error('تعذر قراءة الرد. حاول مرة أخرى.');}
 }
 
-function buildTags(arr, emoji) {
-  if (!arr || !Array.isArray(arr)) return '';
-  return arr.filter(t => t && t.trim().length > 1)
-    .map(t => `<span class="info-tag">${emoji} ${t.trim()}</span>`).join('');
+function buildTags(arr,emoji) {
+  if(!arr||!Array.isArray(arr)) return '';
+  return arr.filter(t=>t&&t.trim().length>1).map(t=>`<span class="info-tag">${emoji} ${t.trim()}</span>`).join('');
 }
 
-// ========== WHATSAPP SHARE ==========
 function shareWhatsApp(summary) {
-  const text = encodeURIComponent(`✦ سافر — خطة رحلتي\n\n${summary}\n\n🌍 اكتشف وجهتك المثالية مع سافر`);
-  window.open(`https://wa.me/?text=${text}`, '_blank');
+  const text=encodeURIComponent(`✦ سافر — خطة رحلتي\n\n${summary}\n\n🌍 اكتشف وجهتك المثالية مع سافر`);
+  window.open(`https://wa.me/?text=${text}`,'_blank');
 }
 
-// ========== RENDER DESTINATION CARDS (JSON) ==========
 function renderCards(destinations, fromCountry) {
-  const wrap = document.getElementById('advisor-result');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  
-  const wrapCards = document.createElement('div');
-  wrapCards.className = 'dest-cards';
-  const nums = ['١', '٢', '٣', '٤', '٥'];
-  let shareSummary = '';
-
-  destinations.forEach((d, i) => {
-    const card = document.createElement('div');
-    card.className = 'dest-card';
-    
-    const flightUrl = buildFlightLink(fromCountry, d.name);
-    const hotelUrl  = buildBookingLink(d.name, fromCountry);
-    const carUrl    = buildCarLink(d.name, fromCountry);
-    const activityUrl = buildActivityLink(d.name);
-
-    shareSummary += `📍 وجهة ${nums[i] || (i + 1)}: ${d.name}\n💰 التكلفة التقديرية: ${d.estimated_cost || 'حسب الميزانية'}\n✨ ميزة: ${d.key_feature || ''}\n\n`;
-
-    card.innerHTML = `
+  const wrap=document.createElement('div');
+  wrap.className='dest-cards';
+  const nums=['١','٢','٣','٤','٥'];
+  let shareSummary='';
+  destinations.forEach((d,i)=>{
+    const card=document.createElement('div');
+    card.className='dest-card';
+    card.style.animationDelay=i*0.1+'s';
+    const flightUrl=buildFlightLink(fromCountry,d.name);
+    const hotelUrl=buildBookingLink(d.name,fromCountry);
+    const carUrl=buildCarLink(d.name);
+    const activityUrl=buildActivityLink(d.name);
+    const esimUrl=buildEsimLink();
+    const placeTags=buildTags(d.places,'📍');
+    const actTags=buildTags(d.activities,'🎯');
+    const shopTags=buildTags(d.shopping,'🛍️');
+    shareSummary+=`${nums[i]||i+1}. ${d.name} — ${d.cost||''}\n`;
+    const imgUrl = DEST_IMAGES[d.name] || `https://source.unsplash.com/800x400/?${encodeURIComponent(DEST_SLUGS[d.name]||d.name)},travel`;
+    card.innerHTML=`
+      <div class="dest-img-wrap">
+        <img class="dest-img" src="${imgUrl}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'"/>
+        <div class="dest-img-overlay"></div>
+      </div>
       <div class="dest-card-header">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="dest-num">${nums[i] || (i + 1)}</div>
-          <div class="dest-name">${d.name}</div>
-        </div>
+        <div class="dest-num">${nums[i]||i+1}</div>
+        <div class="dest-name">${d.name||''}</div>
       </div>
       <div class="dest-body">
-        <div class="dest-reason">${d.reason || 'وجهة مثالية مقترحة بناءً على تفضيلاتك وميزانيتك المحددة.'}</div>
-        
+        ${d.reason?`<div class="dest-reason">${d.reason}</div>`:''}
         <div class="dest-meta">
-          ${d.estimated_cost ? `<div class="meta-item"><span class="meta-icon">💰</span><span class="meta-val"><b>التكلفة التقديرية:</b> ${d.estimated_cost}</span></div>` : ''}
-          ${d.weather_info ? `<div class="meta-item"><span class="meta-icon">☀️</span><span class="meta-val"><b>الطقس المتوقع:</b> ${d.weather_info}</span></div>` : ''}
-          ${d.visa_info ? `<div class="meta-item"><span class="meta-icon">🛂</span><span class="meta-val"><b>التأشيرة للخليجيين:</b> ${d.visa_info}</span></div>` : ''}
+          ${d.cost?`<div class="meta-item"><span class="meta-icon">💰</span><span class="meta-val">${d.cost}</span></div>`:''}
+          ${d.visa?`<div class="meta-item"><span class="meta-icon">🛂</span><span class="meta-val">${d.visa}</span></div>`:''}
+          ${d.feature?`<div class="meta-item"><span class="meta-icon">⭐</span><span class="meta-val">${d.feature}</span></div>`:''}
         </div>
-
-        ${d.highlights ? `
-        <div class="info-section">
-          <div class="info-label">✦ أبرز الأنشطة والأماكن:</div>
-          <div class="info-tags">${buildTags(d.highlights, '📍')}</div>
-        </div>` : ''}
+        ${placeTags?`<div class="info-section"><div class="info-label">📍 أبرز الأماكن</div><div class="info-tags">${placeTags}</div></div>`:''}
+        ${actTags?`<div class="info-section"><div class="info-label">🎯 أفضل النشاطات</div><div class="info-tags">${actTags}</div></div>`:''}
+        ${shopTags?`<div class="info-section"><div class="info-label">🛍️ التسوق</div><div class="info-tags">${shopTags}</div></div>`:''}
       </div>
       <div class="dest-actions">
-        <a href="${flightUrl}" target="_blank" class="action-btn btn-flight">✈️ حجز طيران</a>
-        <a href="${hotelUrl}" target="_blank" class="action-btn btn-hotel">🏨 حجز فندق</a>
-        <a href="${carUrl}" target="_blank" class="action-btn btn-car">🚗 تأجير سيارة</a>
-        <a href="${activityUrl}" target="_blank" class="action-btn btn-activity">🎯 فعاليات</a>
-      </div>
-    `;
-    wrapCards.appendChild(card);
+        <a href="${flightUrl}" target="_blank" class="action-btn btn-flight">✈️ الطيران</a>
+        <a href="${hotelUrl}" target="_blank" class="action-btn btn-hotel">🏨 الفندق</a>
+        <a href="${carUrl}" target="_blank" class="action-btn btn-car">🚗 السيارة</a>
+        <a href="${activityUrl}" target="_blank" class="action-btn btn-activity">🎯 نشاطات</a>
+        <a href="${esimUrl}" target="_blank" class="action-btn btn-esim">📱 eSIM</a>
+      </div>`;
+    wrap.appendChild(card);
   });
-
-  wrap.appendChild(wrapCards);
-
-  const shareDiv = document.createElement('div');
-  shareDiv.className = 'result-actions';
-  shareDiv.innerHTML = `<button class="share-btn" onclick="shareWhatsApp(\`${shareSummary}\`)">🟢 مشاركة الخطة عبر WhatsApp</button>`;
-  wrap.appendChild(shareDiv);
+  return {wrap,shareSummary};
 }
 
-// ========== FUNCTIONS TO RUN ADVISOR / COMPARE / COST ==========
+function showResult(id,data,fromCountry) {
+  const container=document.getElementById(id);
+  container.innerHTML='';
+  const destinations=data.destinations||[];
+  if(!destinations.length){container.innerHTML='<div class="error-box">⚠️ لم يتم العثور على نتائج، حاول مرة أخرى.</div>';return;}
+  const {wrap,shareSummary}=renderCards(destinations,fromCountry);
+  const actionsBar=document.createElement('div');
+  actionsBar.className='result-actions';
+  let fullSummary=shareSummary;
+  if(data.recommendation) fullSummary+=`\n✦ التوصية: ${data.recommendation}`;
+  actionsBar.innerHTML=`<button class="share-btn" onclick='shareWhatsApp(${JSON.stringify(fullSummary)})'>🟢 شارك مع الربع</button>`;
+  container.appendChild(actionsBar);
+  container.appendChild(wrap);
+  if(data.recommendation){
+    const recCard=document.createElement('div');
+    recCard.className='result-card';
+    recCard.style.marginTop='16px';
+    recCard.innerHTML=`<div class="result-header"><div class="result-dot"></div><div class="result-label">✦ التوصية الشخصية</div></div><div class="ai-text">${data.recommendation}</div>`;
+    container.appendChild(recCard);
+  }
+}
+
+function showError(id,msg){document.getElementById(id).innerHTML=`<div class="error-box">⚠️ ${msg}</div>`;}
+
 async function runAdvisor() {
-  const btn = document.getElementById('btn-advisor');
-  const country = document.getElementById('a-country').value;
-  const budget = document.getElementById('a-budget').value;
-  const month = document.getElementById('a-month').value;
-  const duration = document.getElementById('a-duration').value;
-  const visa = document.getElementById('a-visa').value;
-  
-  const travelers = getPickerValue('a-travelers-group');
-  const type = getPickerValue('a-type-group');
-  const weather = getPickerValue('a-weather-group');
-  const pref = getPickerValue('a-pref-group');
-  const level = getPickerValue('a-level-group');
-
-  if (!budget) {
-    alert('الرجاء إدخال الميزانية أولاً.');
-    return;
-  }
-
-  if (btn) btn.disabled = true;
+  const cv=aCountry.value;const cur=CURRENCIES[cv];
+  const budget=document.getElementById('a-budget').value;
+  if(!budget){alert('الرجاء إدخال الميزانية');return;}
+  const usd=Math.round(parseFloat(budget)/cur.rate);
+  const travelers=getPickerValue('a-travelers-group')||'2';
+  const month=document.getElementById('a-month').value;
+  const duration=document.getElementById('a-duration').value;
+  const weather=getPickerValue('a-weather-group')||'❄️ بارد / معتدل';
+  const pref=getPickerValue('a-pref-group')||'🏛️ ثقافة وتاريخ';
+  const level=getPickerValue('a-level-group')||'💛 متوسط';
+  const visa=document.getElementById('a-visa').value;
+  const tightBudget=document.getElementById('budget-warning').classList.contains('show');
   showLoading('advisor-result');
-
-  const prompt = `أنت مستشار سفر ذكي وخبير مخصص للمسافر الخليجي. اقترح أفضل 3 وجهات سياحية تناسب هذه البيانات تماماً وبشكل موضوعي ومحايد:
-  - بلد الانطلاق: ${country}
-  - الميزانية الإجمالية: ${budget} ${CURRENCIES[country]?.code || ''}
-  - شهر السفر: ${month}
-  - مدة الرحلة: ${duration}
-  - عدد المسافرين: ${travelers}
-  - نوع السفر: ${type}
-  - تفضيل الطقس: ${weather}
-  - نوع الوجهة الأساسي: ${pref}
-  - مستوى الإنفاق المطلوب: ${level}
-  - سياسة التأشيرة المفضلة: ${visa}
-
-  يجب أن يكون الرد بصيغة JSON كمنظومة مصفوفة (Array) تحتوي على 3 كائنات (Objects) لكل وجهة، وبالمفاتيح التالية بالضبط باللغة العربية:
-  [
-    {
-      "name": "اسم الدولة أو المدينة",
-      "reason": "سبب الترشيح بناءً على الميزانية والطقس في هذا الشهر وملاءمتها للتفضيلات",
-      "estimated_cost": "حسبة تقديرية دقيقة ومحايدة بالعملة المحلية للشخصين شاملة السكن والطيران الاقتصادي",
-      "weather_info": "درجة الحرارة المتوقعة في شهر السفر المتوقع",
-      "visa_info": "متطلبات الفيزا لحاملي الجوازات الخليجية لهذه الوجهة",
-      "key_feature": "الميزة التنافسية الأساسية للوجهة",
-      "highlights": ["نشاط 1", "نشاط 2", "نشاط 3"]
-    }
-  ]`;
-
-  try {
-    const jsonResult = await callClaudeJSON(prompt);
-    if (jsonResult && Array.isArray(jsonResult)) {
-      renderCards(jsonResult, country);
-    } else {
-      throw new Error('الرد ليس مصفوفة صحيحة');
-    }
-  } catch (err) {
-    const resEl = document.getElementById('advisor-result');
-    if (resEl) resEl.innerHTML = `<div class="error-box">⚠️ حدث خطأ أثناء الاتصال بالمستشار الذكي. الرجاء المحاولة مرة أخرى. الخطأ: ${err.message}</div>`;
-  } finally {
-    if (btn) btn.disabled = false;
-  }
+  document.getElementById('btn-advisor').disabled=true;
+  const prompt=`أنت مستشار سفر خبير متخصص في المسافر الخليجي. أجب بالعربية الفصحى.
+المستخدم من ${cur.name}.
+- الميزانية: ${budget} ${cur.code} (≈ $${usd})
+- المسافرون: ${travelers} أشخاص
+- شهر السفر: ${month}
+- المدة: ${duration}
+- الطقس: ${weather}
+- الوجهة: ${pref}
+- مستوى الإنفاق: ${level}
+- التأشيرة: ${visa}
+${tightBudget?'\n⚠️ الميزانية مضغوطة — رشح وجهات اقتصادية قريبة فقط.\n':''}
+رشح أفضل 3 وجهات بصيغة JSON:
+{"destinations":[{"name":"اسم الوجهة","reason":"3 جمل","cost":"المبلغ بـ${cur.code} (≈ $بالدولار)","visa":"وضع التأشيرة","feature":"أبرز ميزة في ${month}","places":["مكان1","مكان2","مكان3","مكان4","مكان5"],"activities":["نشاط1","نشاط2","نشاط3","نشاط4"],"shopping":["تسوق1","تسوق2","تسوق3"]}],"recommendation":"توصية شخصية بوجهة واحدة"}`;
+  try{const r=await callClaudeJSON(prompt);showResult('advisor-result',r,aCountry.value);}
+  catch(e){showError('advisor-result','خطأ: '+e.message);}
+  document.getElementById('btn-advisor').disabled=false;
 }
 
-function runCompare() { alert('سيتم تفعيل ميزة المقارنة الفورية بناءً على خيارات الواجهة الجديدة قريباً.'); }
-function runCost() { alert('جاري ربط حاسبة التكلفة التفصيلية بالذكاء الاصطناعي.'); }
+async function runCompare() {
+  if(selDests.size<2){alert('اختر وجهتين على الأقل');return;}
+  const cv=document.getElementById('c-country').value;const cur=CURRENCIES[cv];
+  const dests=Array.from(selDests).join(' و ');
+  showLoading('compare-result');
+  document.getElementById('btn-compare').disabled=true;
+  const prompt=`قارن بين: ${dests} للمسافر من ${cur.name}.
+بصيغة JSON:
+{"destinations":[{"name":"الوجهة","reason":"وصف جملتين","cost":"تكلفة لشخصين 7 أيام بـ${cur.code}","visa":"التأشيرة","feature":"الأمان/العائلة/الموسم","places":["معلم1","معلم2","معلم3"],"activities":["سعر الفندق","الطعام اليومي"],"shopping":[]}],"recommendation":"الأفضل للخليجي"}`;
+  try{const r=await callClaudeJSON(prompt);showResult('compare-result',r,cv);}
+  catch(e){showError('compare-result','خطأ: '+e.message);}
+  document.getElementById('btn-compare').disabled=false;
+}
+
+async function runCost() {
+  const dest=document.getElementById('co-dest').value;
+  if(!dest){alert('الرجاء إدخال الوجهة');return;}
+  const fromCode=document.getElementById('co-from').value;
+  const fromName=CURRENCIES[fromCode]?CURRENCIES[fromCode].name:fromCode;
+  const currency=document.getElementById('co-currency').value;
+  const travelers=document.getElementById('co-travelers').value;
+  const days=document.getElementById('co-days').value;
+  const hotel=document.getElementById('co-hotel').value;
+  const season=document.getElementById('co-season').value;
+  showLoading('cost-result');
+  document.getElementById('btn-cost').disabled=true;
+  const prompt=`احسب تكلفة رحلة: من ${fromName} إلى ${dest}، ${travelers} مسافرين، ${days} أيام، ${hotel}، ${season}، العملة: ${currency}.
+بصيغة JSON:
+{"destinations":[{"name":"${dest}","reason":"ملخص الرحلة","cost":"المجموع بـ${currency}","visa":"","feature":"نصيحة توفير","places":[],"activities":["الطيران: المبلغ","الفندق: المبلغ","الطعام: المبلغ","المواصلات: المبلغ","الأنشطة: المبلغ","متفرقات: المبلغ"],"shopping":[]}],"recommendation":""}`;
+  try{const r=await callClaudeJSON(prompt);showResult('cost-result',r,fromCode);}
+  catch(e){showError('cost-result','خطأ: '+e.message);}
+  document.getElementById('btn-cost').disabled=false;
+}
 </script>
 </body>
 </html>
